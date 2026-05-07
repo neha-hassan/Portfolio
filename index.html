@@ -796,23 +796,22 @@ footer a:hover { color: var(--terra); }
     <div class="section-tag">Say Hello</div>
     <h1>Let's Work Together</h1>
     <p class="subtitle">Have a project in mind or want to discuss how I can help? Fill in the form below or reach out directly. I typically respond within 24 hours.</p>
-    <form class="contact-form" onsubmit="handleSubmit(event)">
+    <form class="contact-form" action="https://formspree.io/f/mdabldja" method="POST">
       <div class="form-row">
         <div class="form-group">
           <label for="fname">Name</label>
-          <input type="text" id="fname" placeholder="Your name" required/>
+          <input type="text" id="fname" name="name" placeholder="Your name" required/>
         </div>
         <div class="form-group">
           <label for="femail">Email</label>
-          <input type="email" id="femail" placeholder="your@email.com" required/>
+          <input type="email" id="femail" name="email" placeholder="your@email.com" required/>
         </div>
       </div>
       <div class="form-group">
         <label for="fmsg">Message</label>
-        <textarea id="fmsg" placeholder="Tell me about your project..." required></textarea>
+        <textarea id="fmsg" name="message" placeholder="Tell me about your project..." required></textarea>
       </div>
       <button type="submit" class="btn-primary" style="align-self:flex-start;">Send Message</button>
-      <div id="form-success" style="display:none; color:var(--sage); font-size:14px; font-weight:500; margin-top:0.5rem;">Thanks for reaching out! I'll be in touch within 24 hours.</div>
     </form>
     <div class="contact-direct">
       <p>Prefer to reach out directly?</p>
@@ -862,12 +861,6 @@ function filterWork(tab, btn) {
     });
   }
   history.replaceState(null, "", "#" + tab);
-}
-
-function handleSubmit(e) {
-  e.preventDefault();
-  document.getElementById("form-success").style.display = "block";
-  e.target.reset();
 }
 
 window.addEventListener("load", function() {
