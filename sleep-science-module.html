@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sleep Science: Why You Can't Switch Off</title>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@300;400;500;600&family=Syne:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap');
+
+:root {
+  --navy: #0a0e1a;
+  --navy-mid: #111827;
+  --navy-light: #1a2236;
+  --navy-card: #1e2d4a;
+  --purple: #6c3fc5;
+  --purple-light: #9b6dff;
+  --purple-glow: rgba(108,63,197,0.3);
+  --blue: #3b82f6;
+  --blue-light: #60a5fa;
+  --teal: #0ea5e9;
+  --gold: #f59e0b;
+  --green: #10b981;
+  --red: #ef4444;
+  --text: #e2e8f0;
+  --text-mid: #94a3b8;
+  --text-soft: #64748b;
+  --border: rgba(255,255,255,0.08);
+  --border-strong: rgba(255,255,255,0.15);
+  --glow: 0 0 40px rgba(108,63,197,0.2);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+
+body {
+  font-family: "Inter", sans-serif;
+  background: #050810;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 16px;
+}
+
+/* SHELL */
+.shell {
+  width: 960px;
+  background: var(--navy);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 25px 80px rgba(0,0,0,0.7), 0 0 0 1px var(--border);
+  position: relative;
+}
+
+/* TOP BAR */
+.topbar {
+  background: rgba(10,14,26,0.95);
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 10;
+}
+.topbar-left { display: flex; align-items: center; gap: 12px; }
+.topbar-dots { display: flex; gap: 6px; }
+.topbar-dot { width: 10px; height: 10px; border-radius: 50%; }
+.dot-red { background: #ff5f57; }
+.dot-yellow { background: #febc2e; }
+.dot-green { background: #28c840; }
+.topbar-title {
+  font-size: 12px; font-weight: 500;
+  color: var(--text-mid); letter-spacing: 0.05em;
+  font-family: "Syne", sans-serif;
+}
+.topbar-right { display: flex; gap: 8px; align-items: center; }
+.tb-btn {
+  width: 28px; height: 28px; border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-soft); font-size: 12px;
+  transition: all 0.2s;
+}
+.tb-btn:hover { background: var(--border); color: var(--text); }
+
+/* SLIDE CONTAINER */
+.slides { position: relative; width: 960px; height: 540px; overflow: hidden; }
+.slide {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.slide.active { opacity: 1; pointer-events: all; }
+
+/* BOTTOM BAR */
+.bottombar {
+  background: rgba(10,14,26,0.95);
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  border-top: 1px solid var(--border);
+  position: relative; z-index: 10;
+}
+.progress-wrap { display: flex; align-items: center; gap: 10px; flex: 1; max-width: 280px; }
+.progress-label { font-size: 11px; color: var(--text-soft); white-space: nowrap; font-family: "Syne", sans-serif; }
+.progress-bar { flex: 1; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--purple), var(--purple-light)); border-radius: 2px; transition: width 0.5s cubic-bezier(.4,0,.2,1); }
+.nav-btns { display: flex; gap: 8px; }
+.nav-btn {
+  padding: 8px 20px; border-radius: 4px;
+  font-size: 12px; font-weight: 600;
+  cursor: pointer; border: none;
+  font-family: "Syne", sans-serif;
+  letter-spacing: 0.04em;
+  transition: all 0.2s;
+}
+.btn-prev {
+  background: transparent; color: var(--text-mid);
+  border: 1px solid var(--border);
+}
+.btn-prev:hover:not(:disabled) { background: var(--border); color: var(--text); }
+.btn-prev:disabled { opacity: 0.3; cursor: not-allowed; }
+.btn-next {
+  background: linear-gradient(135deg, var(--purple), var(--purple-light));
+  color: white;
+}
+.btn-next:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
+.btn-next:disabled { background: var(--border); color: var(--text-soft); cursor: not-allowed; }
+.slide-counter { font-size: 11px; color: var(--text-soft); font-family: "Syne", sans-serif; }
+
+/* ========== SLIDE 1: TITLE ========== */
+#s1 {
+  background: radial-gradient(ellipse at 30% 50%, rgba(108,63,197,0.25) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 20%, rgba(59,130,246,0.15) 0%, transparent 50%),
+              var(--navy);
+  align-items: center; justify-content: center;
+  text-align: center; padding: 40px;
+  position: relative; overflow: hidden;
+}
+.s1-stars {
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+}
+.star {
+  position: absolute; width: 2px; height: 2px;
+  background: white; border-radius: 50%;
+  animation: twinkle var(--dur, 3s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  opacity: var(--op, 0.5);
+}
+@keyframes twinkle {
+  0%, 100% { opacity: var(--op, 0.5); transform: scale(1); }
+  50% { opacity: 0.1; transform: scale(0.5); }
+}
+.s1-brain {
+  width: 120px; height: 120px;
+  margin: 0 auto 24px;
+  position: relative;
+}
+.brain-circle {
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, rgba(108,63,197,0.4), transparent 70%);
+  border: 1px solid rgba(108,63,197,0.4);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 52px;
+  animation: pulse-brain 3s ease-in-out infinite;
+}
+@keyframes pulse-brain {
+  0%, 100% { box-shadow: 0 0 20px rgba(108,63,197,0.3); }
+  50% { box-shadow: 0 0 50px rgba(108,63,197,0.6), 0 0 80px rgba(108,63,197,0.2); }
+}
+.s1-label {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--purple-light); margin-bottom: 16px;
+  font-family: "Syne", sans-serif;
+}
+.s1-title {
+  font-family: "Syne", sans-serif;
+  font-size: 42px; font-weight: 700;
+  color: white; line-height: 1.1;
+  margin-bottom: 12px; letter-spacing: -0.02em;
+}
+.s1-title span { color: var(--purple-light); }
+.s1-subtitle {
+  font-size: 16px; color: var(--text-mid);
+  max-width: 480px; margin: 0 auto 32px;
+  line-height: 1.6;
+}
+.s1-meta { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+.s1-meta-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--text-soft);
+  font-family: "Syne", sans-serif;
+}
+.s1-meta-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--purple-light); }
+.start-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, var(--purple), var(--purple-light));
+  color: white; padding: 12px 32px; border-radius: 100px;
+  font-size: 14px; font-weight: 600; cursor: pointer;
+  border: none; margin-bottom: 24px;
+  font-family: "Syne", sans-serif; letter-spacing: 0.04em;
+  transition: all 0.2s; box-shadow: 0 4px 20px rgba(108,63,197,0.4);
+}
+.start-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(108,63,197,0.5); }
+
+/* ========== SLIDE 2: SLEEP STAGES ========== */
+#s2 {
+  background: var(--navy-mid);
+  padding: 28px 36px;
+  overflow: hidden;
+}
+.slide-header {
+  margin-bottom: 20px;
+}
+.slide-tag {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--purple-light); margin-bottom: 6px;
+  font-family: "Syne", sans-serif;
+}
+.slide-title {
+  font-family: "Syne", sans-serif;
+  font-size: 22px; font-weight: 700;
+  color: white; line-height: 1.2;
+}
+.slide-instruction {
+  font-size: 12px; color: var(--text-soft);
+  margin-top: 4px; font-style: italic;
+}
+.stages-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 12px; margin-bottom: 16px;
+}
+.stage-card {
+  background: var(--navy-light);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px 14px;
+  cursor: pointer; transition: all 0.25s;
+  position: relative; overflow: hidden;
+  text-align: center;
+}
+.stage-card::before {
+  content: ""; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: var(--stage-color, var(--purple));
+  transform: scaleX(0); transition: transform 0.3s;
+  transform-origin: left;
+}
+.stage-card:hover::before, .stage-card.revealed::before { transform: scaleX(1); }
+.stage-card:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+.stage-card.revealed {
+  border-color: var(--stage-color, var(--purple));
+  background: rgba(108,63,197,0.08);
+}
+.stage-num {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--stage-color, var(--purple-light));
+  margin-bottom: 8px;
+  font-family: "Syne", sans-serif;
+}
+.stage-icon { font-size: 28px; margin-bottom: 8px; display: block; }
+.stage-name {
+  font-family: "Syne", sans-serif;
+  font-size: 13px; font-weight: 600; color: white; margin-bottom: 6px;
+}
+.stage-reveal {
+  font-size: 11.5px; line-height: 1.6; color: var(--text-mid);
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s;
+  opacity: 0;
+}
+.stage-card.revealed .stage-reveal { max-height: 200px; opacity: 1; }
+.stage-click-hint {
+  font-size: 10px; color: var(--text-soft);
+  margin-top: 6px; display: flex; align-items: center;
+  justify-content: center; gap: 4px;
+}
+.stage-card.revealed .stage-click-hint { display: none; }
+.stages-progress {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 12px; color: var(--text-soft);
+}
+.stages-progress-bar {
+  flex: 1; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden;
+}
+.stages-progress-fill {
+  height: 100%; background: linear-gradient(90deg, var(--purple), var(--green));
+  border-radius: 2px; transition: width 0.4s ease;
+}
+
+/* ========== SLIDE 3: CIRCADIAN RHYTHM ========== */
+#s3 {
+  background: var(--navy-mid);
+  padding: 28px 36px;
+}
+.clock-wrap {
+  display: flex; gap: 28px; align-items: flex-start;
+}
+.clock-left { flex: 1; }
+.clock-visual {
+  position: relative; width: 220px; height: 220px;
+  flex-shrink: 0;
+}
+.clock-svg { width: 220px; height: 220px; }
+.clock-hotspots {
+  position: absolute; inset: 0;
+}
+.hotspot {
+  position: absolute; width: 28px; height: 28px;
+  border-radius: 50%; cursor: pointer;
+  transform: translate(-50%, -50%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: white;
+  transition: all 0.2s; border: 2px solid rgba(255,255,255,0.3);
+  font-family: "Syne", sans-serif;
+}
+.hotspot:hover { transform: translate(-50%, -50%) scale(1.2); }
+.hotspot.active { transform: translate(-50%, -50%) scale(1.25); box-shadow: 0 0 20px currentColor; }
+.hotspot-1 { top: 5%; left: 50%; background: #f59e0b; }
+.hotspot-2 { top: 25%; left: 90%; background: #10b981; }
+.hotspot-3 { top: 75%; left: 90%; background: #6366f1; }
+.hotspot-4 { top: 95%; left: 50%; background: #8b5cf6; }
+.hotspot-5 { top: 75%; left: 10%; background: #3b82f6; }
+.hotspot-6 { top: 25%; left: 10%; background: #ec4899; }
+.clock-info-panel {
+  background: var(--navy-light);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px;
+  min-height: 140px; flex: 1;
+}
+.cip-default { color: var(--text-soft); font-size: 13px; font-style: italic; }
+.cip-content { display: none; }
+.cip-content.active { display: block; }
+.cip-time {
+  font-family: "Syne", sans-serif;
+  font-size: 28px; font-weight: 700; margin-bottom: 4px;
+}
+.cip-event {
+  font-family: "Syne", sans-serif;
+  font-size: 14px; font-weight: 600; color: white; margin-bottom: 8px;
+}
+.cip-desc { font-size: 13px; line-height: 1.65; color: var(--text-mid); }
+.circadian-hint {
+  font-size: 11px; color: var(--text-soft); margin-top: 8px; text-align: center;
+  font-style: italic;
+}
+
+/* ========== SLIDE 4: MODERN LIFE ========== */
+#s4 {
+  background: var(--navy-mid);
+  padding: 28px 36px;
+}
+.disruptors-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 12px; margin-top: 16px;
+}
+.disruptor-card {
+  background: var(--navy-light);
+  border: 1px solid var(--border);
+  border-radius: 14px; padding: 18px 14px;
+  cursor: pointer; transition: all 0.3s;
+  position: relative; overflow: hidden;
+  text-align: center;
+}
+.disruptor-card:hover { transform: translateY(-3px); border-color: var(--border-strong); }
+.disruptor-card.open {
+  grid-column: span 2;
+  text-align: left;
+  border-color: var(--dc-color);
+  background: rgba(255,255,255,0.04);
+}
+.dc-icon { font-size: 32px; margin-bottom: 10px; display: block; }
+.dc-title {
+  font-family: "Syne", sans-serif;
+  font-size: 13px; font-weight: 700; color: white; margin-bottom: 4px;
+}
+.dc-teaser { font-size: 11px; color: var(--text-soft); }
+.dc-expanded { display: none; }
+.disruptor-card.open .dc-expanded { display: block; }
+.disruptor-card.open .dc-teaser { display: none; }
+.dc-exp-title {
+  font-family: "Syne", sans-serif;
+  font-size: 16px; font-weight: 700; color: white; margin-bottom: 6px;
+}
+.dc-exp-body { font-size: 13px; line-height: 1.7; color: var(--text-mid); }
+.dc-exp-stat {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 10px; padding: 6px 12px;
+  border-radius: 100px; font-size: 11px; font-weight: 600;
+  background: rgba(255,255,255,0.06); color: var(--dc-color);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.dc-close {
+  position: absolute; top: 12px; right: 12px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--border); border: none; cursor: pointer;
+  color: var(--text-mid); font-size: 12px;
+  display: none; align-items: center; justify-content: center;
+}
+.disruptor-card.open .dc-close { display: flex; }
+
+/* ========== SLIDE 5: MYTHS ========== */
+#s5 {
+  background: var(--navy-mid);
+  padding: 28px 36px;
+}
+.myths-list {
+  display: flex; flex-direction: column; gap: 10px; margin-top: 16px;
+}
+.myth-item {
+  background: var(--navy-light);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px 20px;
+  display: flex; align-items: center; gap: 16px;
+  cursor: pointer; transition: all 0.25s;
+}
+.myth-item:hover:not(.answered) { border-color: var(--border-strong); }
+.myth-stmt {
+  flex: 1; font-size: 14px; line-height: 1.5; color: var(--text);
+}
+.myth-btns { display: flex; gap: 8px; flex-shrink: 0; }
+.myth-btn {
+  padding: 7px 18px; border-radius: 6px;
+  font-size: 12px; font-weight: 700;
+  cursor: pointer; border: 1.5px solid var(--border);
+  transition: all 0.2s; font-family: "Syne", sans-serif;
+  letter-spacing: 0.04em;
+}
+.myth-btn.true-btn { background: transparent; color: var(--green); border-color: var(--green); }
+.myth-btn.false-btn { background: transparent; color: var(--red); border-color: var(--red); }
+.myth-btn.true-btn:hover { background: rgba(16,185,129,0.15); }
+.myth-btn.false-btn:hover { background: rgba(239,68,68,0.15); }
+.myth-item.answered .myth-btn { pointer-events: none; opacity: 0.4; }
+.myth-item.answered .myth-btn.selected-correct { opacity: 1; background: rgba(16,185,129,0.2); border-color: var(--green); }
+.myth-item.answered .myth-btn.selected-wrong { opacity: 1; background: rgba(239,68,68,0.2); border-color: var(--red); }
+.myth-feedback {
+  font-size: 12px; line-height: 1.5; color: var(--text-mid);
+  max-height: 0; overflow: hidden; transition: max-height 0.4s, opacity 0.3s;
+  opacity: 0; margin-top: 0;
+}
+.myth-item.answered .myth-feedback { max-height: 100px; opacity: 1; margin-top: 8px; }
+.myth-result-icon { font-size: 20px; flex-shrink: 0; opacity: 0; transition: opacity 0.3s; }
+.myth-item.answered .myth-result-icon { opacity: 1; }
+.myths-score { margin-top: 12px; font-size: 13px; color: var(--text-soft); text-align: right; }
+
+/* ========== SLIDE 6: BODY MAP ========== */
+#s6 {
+  background: var(--navy-mid);
+  padding: 28px 36px;
+  display: flex; gap: 28px;
+}
+.body-map-wrap {
+  position: relative; width: 180px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.body-svg-wrap {
+  position: relative;
+}
+.body-hotspot {
+  position: absolute; cursor: pointer;
+  transition: all 0.2s;
+}
+.body-hotspot-dot {
+  width: 22px; height: 22px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 700; color: white;
+  animation: pulse-dot 2s ease-in-out infinite;
+  font-family: "Syne", sans-serif;
+}
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.3); }
+  50% { box-shadow: 0 0 0 6px rgba(255,255,255,0); }
+}
+.body-hotspot:hover .body-hotspot-dot { transform: scale(1.2); }
+.body-hotspot.active .body-hotspot-dot { transform: scale(1.3); box-shadow: 0 0 15px currentColor; }
+.body-info-area {
+  flex: 1; display: flex; flex-direction: column; gap: 12px;
+}
+.body-info-header { margin-bottom: 4px; }
+.body-info-panel {
+  background: var(--navy-light);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 18px;
+  flex: 1; transition: all 0.3s;
+}
+.body-info-panel.highlighted { border-color: var(--bip-color, var(--purple)); }
+.bip-default { color: var(--text-soft); font-size: 13px; font-style: italic; }
+.bip-content { display: none; }
+.bip-content.active { display: block; }
+.bip-organ {
+  font-family: "Syne", sans-serif;
+  font-size: 18px; font-weight: 700; color: white; margin-bottom: 6px;
+}
+.bip-subtitle { font-size: 11px; color: var(--text-soft); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-family: "Syne", sans-serif; }
+.bip-body { font-size: 13px; line-height: 1.7; color: var(--text-mid); }
+.bip-stat {
+  margin-top: 10px; padding: 8px 12px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 8px; font-size: 12px;
+  color: var(--bip-color, var(--purple-light));
+  border-left: 2px solid var(--bip-color, var(--purple));
+}
+.body-nav-dots {
+  display: flex; gap: 6px; justify-content: center; margin-top: 8px;
+}
+.body-nav-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--border); cursor: pointer; transition: all 0.2s;
+}
+.body-nav-dot.active { background: var(--purple-light); transform: scale(1.3); }
+
+/* ========== SLIDE 7: STRATEGIES ========== */
+#s7 {
+  background: var(--navy-mid);
+  padding: 28px 36px;
+}
+.strategies-tabs { display: flex; gap: 6px; margin: 14px 0 16px; flex-wrap: wrap; }
+.strat-tab {
+  padding: 7px 16px; border-radius: 100px;
+  font-size: 12px; font-weight: 600;
+  cursor: pointer; border: 1.5px solid var(--border);
+  background: transparent; color: var(--text-mid);
+  transition: all 0.2s; font-family: "Syne", sans-serif;
+}
+.strat-tab:hover { border-color: var(--border-strong); color: var(--text); }
+.strat-tab.active {
+  background: linear-gradient(135deg, var(--purple), var(--purple-light));
+  border-color: transparent; color: white;
+  box-shadow: 0 4px 15px rgba(108,63,197,0.3);
+}
+.strat-panels { position: relative; }
+.strat-panel { display: none; }
+.strat-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.strat-main {
+  background: var(--navy-light);
+  border-radius: 12px; padding: 20px;
+  border: 1px solid var(--border);
+}
+.strat-icon { font-size: 32px; margin-bottom: 12px; }
+.strat-title {
+  font-family: "Syne", sans-serif;
+  font-size: 18px; font-weight: 700; color: white; margin-bottom: 8px;
+}
+.strat-body { font-size: 13px; line-height: 1.75; color: var(--text-mid); }
+.strat-science {
+  background: rgba(108,63,197,0.1);
+  border: 1px solid rgba(108,63,197,0.3);
+  border-radius: 12px; padding: 16px;
+}
+.strat-science-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--purple-light); margin-bottom: 8px;
+  font-family: "Syne", sans-serif;
+}
+.strat-science-body { font-size: 13px; line-height: 1.7; color: var(--text-mid); }
+.strat-tip {
+  margin-top: 12px; padding: 10px 14px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 8px; border-left: 2px solid var(--purple-light);
+  font-size: 12px; color: var(--text); line-height: 1.5;
+}
+
+/* ========== SLIDE 8: QUIZ ========== */
+#s8 {
+  background: var(--navy-mid);
+  padding: 28px 36px;
+  overflow-y: auto;
+}
+.quiz-wrap { max-width: 680px; }
+.quiz-q-counter {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--purple-light);
+  margin-bottom: 8px; font-family: "Syne", sans-serif;
+}
+.quiz-q-text {
+  font-family: "Syne", sans-serif;
+  font-size: 18px; font-weight: 600; color: white;
+  line-height: 1.4; margin-bottom: 6px;
+}
+.quiz-q-scenario {
+  background: rgba(59,130,246,0.1);
+  border-left: 2px solid var(--blue);
+  border-radius: 6px; padding: 10px 14px;
+  font-size: 13px; color: var(--text-mid);
+  margin-bottom: 16px; line-height: 1.6;
+}
+.quiz-options-wrap { display: flex; flex-direction: column; gap: 8px; }
+.quiz-opt {
+  padding: 12px 18px; background: var(--navy-light);
+  border: 1.5px solid var(--border); border-radius: 10px;
+  cursor: pointer; font-size: 13.5px; color: var(--text);
+  transition: all 0.2s; display: flex; align-items: center; gap: 12px;
+}
+.quiz-opt:hover:not(.disabled) { border-color: var(--border-strong); background: rgba(255,255,255,0.04); }
+.quiz-opt.correct { border-color: var(--green); background: rgba(16,185,129,0.1); color: #6ee7b7; }
+.quiz-opt.wrong { border-color: var(--red); background: rgba(239,68,68,0.1); color: #fca5a5; }
+.quiz-opt.disabled { pointer-events: none; }
+.q-opt-letter {
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 1.5px solid var(--border); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: var(--text-soft);
+  font-family: "Syne", sans-serif;
+}
+.quiz-opt.correct .q-opt-letter { background: var(--green); border-color: var(--green); color: white; }
+.quiz-opt.wrong .q-opt-letter { background: var(--red); border-color: var(--red); color: white; }
+.quiz-feedback-box {
+  margin-top: 12px; padding: 12px 16px; border-radius: 10px;
+  font-size: 13px; line-height: 1.6; display: none;
+}
+.qfb-correct { background: rgba(16,185,129,0.1); border-left: 3px solid var(--green); color: #6ee7b7; }
+.qfb-wrong { background: rgba(239,68,68,0.1); border-left: 3px solid var(--red); color: #fca5a5; }
+.quiz-nav { display: flex; justify-content: flex-end; margin-top: 16px; }
+.quiz-next-btn {
+  padding: 9px 24px; border-radius: 6px;
+  background: linear-gradient(135deg, var(--purple), var(--purple-light));
+  color: white; font-size: 13px; font-weight: 600;
+  border: none; cursor: pointer; font-family: "Syne", sans-serif;
+  display: none; transition: all 0.2s;
+}
+.quiz-next-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.quiz-next-btn.visible { display: inline-block; }
+
+/* ========== SLIDE 9: RESULTS ========== */
+#s9 {
+  background: radial-gradient(ellipse at 50% 50%, rgba(108,63,197,0.2) 0%, transparent 60%), var(--navy-mid);
+  align-items: center; justify-content: center;
+  text-align: center; padding: 40px;
+}
+.results-glow {
+  width: 100px; height: 100px; border-radius: 50%;
+  margin: 0 auto 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 44px;
+  animation: pulse-brain 3s ease-in-out infinite;
+}
+.results-title {
+  font-family: "Syne", sans-serif;
+  font-size: 28px; font-weight: 700; color: white; margin-bottom: 8px;
+}
+.results-score {
+  font-family: "Syne", sans-serif;
+  font-size: 64px; font-weight: 700;
+  line-height: 1; margin-bottom: 8px;
+}
+.results-of { font-size: 18px; color: var(--text-soft); }
+.results-label { font-size: 14px; color: var(--text-mid); margin-bottom: 20px; }
+.results-msg {
+  max-width: 440px; margin: 0 auto 24px;
+  font-size: 14px; line-height: 1.7; color: var(--text-mid);
+  background: var(--navy-light); border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px 20px; text-align: left;
+}
+.restart-btn {
+  padding: 11px 32px; border-radius: 100px;
+  background: transparent; color: var(--purple-light);
+  border: 1.5px solid var(--purple-light);
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  font-family: "Syne", sans-serif; transition: all 0.2s;
+}
+.restart-btn:hover { background: rgba(108,63,197,0.15); }
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-dots">
+        <div class="topbar-dot dot-red"></div>
+        <div class="topbar-dot dot-yellow"></div>
+        <div class="topbar-dot dot-green"></div>
+      </div>
+      <span class="topbar-title">Sleep Science: Why You Can't Switch Off</span>
+    </div>
+    <div class="topbar-right">
+      <button class="tb-btn">&#9776;</button>
+      <button class="tb-btn">&#9432;</button>
+    </div>
+  </div>
+
+  <!-- SLIDES -->
+  <div class="slides">
+
+    <!-- SLIDE 1: TITLE -->
+    <div class="slide active" id="s1">
+      <div class="s1-stars" id="stars"></div>
+      <div class="s1-brain">
+        <div class="brain-circle">&#129504;</div>
+      </div>
+      <div class="s1-label">Science-Based Learning Module</div>
+      <h1 class="s1-title">Sleep Science<br><span>Why You Can't Switch Off</span></h1>
+      <p class="s1-subtitle">Discover what really happens when you sleep, why modern life disrupts it, and what the neuroscience says about getting it back.</p>
+      <div class="s1-meta">
+        <div class="s1-meta-item"><div class="s1-meta-dot"></div>8 interactive slides</div>
+        <div class="s1-meta-item"><div class="s1-meta-dot"></div>Evidence-based</div>
+        <div class="s1-meta-item"><div class="s1-meta-dot"></div>Knowledge check included</div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: SLEEP STAGES -->
+    <div class="slide" id="s2">
+      <div class="slide-header">
+        <div class="slide-tag">The Basics</div>
+        <div class="slide-title">What Happens When You Sleep?</div>
+        <div class="slide-instruction">Click each stage to reveal what your brain is doing.</div>
+      </div>
+      <div class="stages-grid">
+        <div class="stage-card" style="--stage-color:#60a5fa;" onclick="revealStage(this, 0)">
+          <div class="stage-num">Stage 1</div>
+          <span class="stage-icon">&#128564;</span>
+          <div class="stage-name">Light Sleep</div>
+          <div class="stage-reveal">You drift in and out of consciousness. Muscle activity slows. This stage lasts just 5-10 minutes and is easily disrupted. Your brain produces alpha and theta waves.</div>
+          <div class="stage-click-hint">&#128432; Click to explore</div>
+        </div>
+        <div class="stage-card" style="--stage-color:#34d399;" onclick="revealStage(this, 1)">
+          <div class="stage-num">Stage 2</div>
+          <span class="stage-icon">&#127772;</span>
+          <div class="stage-name">True Sleep</div>
+          <div class="stage-reveal">Body temperature drops, heart rate slows, and eye movements stop. Sleep spindles appear, protecting sleep from disruption. You spend about 50% of total sleep here.</div>
+          <div class="stage-click-hint">&#128432; Click to explore</div>
+        </div>
+        <div class="stage-card" style="--stage-color:#a78bfa;" onclick="revealStage(this, 2)">
+          <div class="stage-num">Stage 3</div>
+          <span class="stage-icon">&#128167;</span>
+          <div class="stage-name">Deep Sleep</div>
+          <div class="stage-reveal">Slow delta waves dominate. Growth hormone is released. Cellular repair happens here. This is the hardest stage to be woken from and the most physically restorative.</div>
+          <div class="stage-click-hint">&#128432; Click to explore</div>
+        </div>
+        <div class="stage-card" style="--stage-color:#fb923c;" onclick="revealStage(this, 3)">
+          <div class="stage-num">Stage 4</div>
+          <span class="stage-icon">&#127775;</span>
+          <div class="stage-name">REM Sleep</div>
+          <div class="stage-reveal">Rapid Eye Movement sleep. Brain activity resembles waking. This is where dreams occur, memories consolidate, and emotional processing happens. Critical for learning and mental health.</div>
+          <div class="stage-click-hint">&#128432; Click to explore</div>
+        </div>
+      </div>
+      <div class="stages-progress">
+        <span id="stages-count">0 of 4 explored</span>
+        <div class="stages-progress-bar"><div class="stages-progress-fill" id="stages-fill" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: CIRCADIAN RHYTHM -->
+    <div class="slide" id="s3">
+      <div class="slide-header">
+        <div class="slide-tag">Your Internal Clock</div>
+        <div class="slide-title">Your Circadian Rhythm Across 24 Hours</div>
+        <div class="slide-instruction">Click the hotspots on the clock to explore each phase.</div>
+      </div>
+      <div class="clock-wrap">
+        <div class="clock-visual">
+          <svg class="clock-svg" viewBox="0 0 220 220">
+            <circle cx="110" cy="110" r="100" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+            <circle cx="110" cy="110" r="80" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <circle cx="110" cy="110" r="55" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+            <!-- Day arc -->
+            <path d="M110 10 A100 100 0 0 1 210 110" fill="none" stroke="#f59e0b" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+            <path d="M110 210 A100 100 0 0 1 10 110" fill="none" stroke="#6366f1" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+            <!-- Hour markers -->
+            <line x1="110" y1="15" x2="110" y2="25" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            <line x1="205" y1="110" x2="195" y2="110" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            <line x1="110" y1="205" x2="110" y2="195" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            <line x1="15" y1="110" x2="25" y2="110" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            <text x="110" y="49" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="9" font-family="Syne, sans-serif">12AM</text>
+            <text x="185" y="113" text-anchor="start" fill="rgba(255,255,255,0.5)" font-size="9" font-family="Syne, sans-serif">6AM</text>
+            <text x="110" y="198" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="9" font-family="Syne, sans-serif">12PM</text>
+            <text x="28" y="113" text-anchor="end" fill="rgba(255,255,255,0.5)" font-size="9" font-family="Syne, sans-serif">6PM</text>
+            <text x="110" y="115" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="10" font-family="Syne, sans-serif" font-weight="700">24hr</text>
+            <text x="110" y="127" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Syne, sans-serif">CYCLE</text>
+          </svg>
+          <div class="clock-hotspots">
+            <div class="hotspot hotspot-1" onclick="showClockInfo(0, this)" title="12AM">12</div>
+            <div class="hotspot hotspot-2" onclick="showClockInfo(1, this)" title="3AM">3A</div>
+            <div class="hotspot hotspot-3" onclick="showClockInfo(2, this)" title="9AM">9A</div>
+            <div class="hotspot hotspot-4" onclick="showClockInfo(3, this)" title="12PM">12P</div>
+            <div class="hotspot hotspot-5" onclick="showClockInfo(4, this)" title="6PM">6P</div>
+            <div class="hotspot hotspot-6" onclick="showClockInfo(5, this)" title="9PM">9P</div>
+          </div>
+        </div>
+        <div class="clock-info-panel" id="clock-panel">
+          <div class="cip-default" id="cip-default">Select a time on the clock to see what your body is doing.</div>
+          <div class="cip-content" id="cip-0" style="--cip-c:#f59e0b;">
+            <div class="cip-time" style="color:#f59e0b;">12:00 AM</div>
+            <div class="cip-event">Deep Sleep Peak</div>
+            <div class="cip-desc">Your body is in its deepest sleep phases. Growth hormone is released, cellular repair is at its peak, and your immune system is highly active. Disrupting sleep now has the highest cost.</div>
+          </div>
+          <div class="cip-content" id="cip-1" style="--cip-c:#10b981;">
+            <div class="cip-time" style="color:#10b981;">3:00 AM</div>
+            <div class="cip-event">Lowest Body Temperature</div>
+            <div class="cip-desc">Core body temperature reaches its minimum. REM sleep becomes more frequent in the second half of the night. This is when most dreams occur and emotional memory consolidates.</div>
+          </div>
+          <div class="cip-content" id="cip-2" style="--cip-c:#6366f1;">
+            <div class="cip-time" style="color:#6366f1;">9:00 AM</div>
+            <div class="cip-event">Cortisol Peak</div>
+            <div class="cip-desc">Cortisol rises sharply to wake you and energise the body. Alertness, focus, and short-term memory are at their best. This is your prime window for demanding cognitive work.</div>
+          </div>
+          <div class="cip-content" id="cip-3" style="--cip-c:#8b5cf6;">
+            <div class="cip-time" style="color:#8b5cf6;">12:00 PM</div>
+            <div class="cip-event">Post-Lunch Dip</div>
+            <div class="cip-desc">A natural dip in alertness occurs, driven by your circadian rhythm (not just lunch). Many cultures build a short rest here. Even a 20-minute nap can restore alertness for hours.</div>
+          </div>
+          <div class="cip-content" id="cip-4" style="--cip-c:#3b82f6;">
+            <div class="cip-time" style="color:#3b82f6;">6:00 PM</div>
+            <div class="cip-event">Physical Performance Peak</div>
+            <div class="cip-desc">Muscle strength, reaction time, and cardiovascular efficiency peak in the late afternoon. This is why athletes often perform best in evening events.</div>
+          </div>
+          <div class="cip-content" id="cip-5" style="--cip-c:#ec4899;">
+            <div class="cip-time" style="color:#ec4899;">9:00 PM</div>
+            <div class="cip-event">Melatonin Release Begins</div>
+            <div class="cip-desc">The pineal gland begins releasing melatonin, signalling that it is time to sleep. Blue light from screens suppresses this process. Dimming lights and reducing screen time here is high-impact.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: MODERN LIFE DISRUPTORS -->
+    <div class="slide" id="s4">
+      <div class="slide-header">
+        <div class="slide-tag">The Problem</div>
+        <div class="slide-title">Why Modern Life Wrecks Your Sleep</div>
+        <div class="slide-instruction">Click a disruptor to reveal the science.</div>
+      </div>
+      <div class="disruptors-grid" id="disruptors-grid">
+        <div class="disruptor-card" style="--dc-color:#3b82f6;" onclick="openDisruptor(this)">
+          <span class="dc-icon">&#128267;</span>
+          <div class="dc-title">Blue Light</div>
+          <div class="dc-teaser">Your screens are lying to your brain.</div>
+          <div class="dc-expanded">
+            <div class="dc-exp-title" style="color:#3b82f6;">Blue Light Exposure</div>
+            <div class="dc-exp-body">Blue light from phones, laptops, and TVs directly suppresses melatonin production. Your brain interprets blue light as daylight, delaying the sleep signal by up to 3 hours. Even low-level exposure for 2 hours before bed measurably reduces sleep quality.</div>
+            <div class="dc-exp-stat" style="--dc-color:#3b82f6;">Melatonin suppressed up to 3 hours</div>
+          </div>
+          <button class="dc-close" onclick="closeDisruptor(event, this)">&#10005;</button>
+        </div>
+        <div class="disruptor-card" style="--dc-color:#ef4444;" onclick="openDisruptor(this)">
+          <span class="dc-icon">&#129299;</span>
+          <div class="dc-title">Stress and Cortisol</div>
+          <div class="dc-teaser">Your nervous system doesn't clock off.</div>
+          <div class="dc-expanded">
+            <div class="dc-exp-title" style="color:#ef4444;">Stress and Cortisol</div>
+            <div class="dc-exp-body">Chronic stress keeps cortisol elevated into the evening. Since cortisol and melatonin are opposites in the body, high evening cortisol actively prevents sleep onset. Rumination keeps the prefrontal cortex active, which also delays sleep.</div>
+            <div class="dc-exp-stat" style="--dc-color:#ef4444;">Chronic stress reduces deep sleep by 30%</div>
+          </div>
+          <button class="dc-close" onclick="closeDisruptor(event, this)">&#10005;</button>
+        </div>
+        <div class="disruptor-card" style="--dc-color:#f59e0b;" onclick="openDisruptor(this)">
+          <span class="dc-icon">&#9749;</span>
+          <div class="dc-title">Caffeine</div>
+          <div class="dc-teaser">That 3pm coffee is still active at midnight.</div>
+          <div class="dc-expanded">
+            <div class="dc-exp-title" style="color:#f59e0b;">Caffeine Half-Life</div>
+            <div class="dc-exp-body">Caffeine has a half-life of 5-6 hours. A coffee at 3pm means half the caffeine is still in your system at 9pm. It works by blocking adenosine receptors, preventing the buildup of sleep pressure that naturally drives you to sleep.</div>
+            <div class="dc-exp-stat" style="--dc-color:#f59e0b;">Half-life: 5 to 6 hours</div>
+          </div>
+          <button class="dc-close" onclick="closeDisruptor(event, this)">&#10005;</button>
+        </div>
+        <div class="disruptor-card" style="--dc-color:#10b981;" onclick="openDisruptor(this)">
+          <span class="dc-icon">&#128197;</span>
+          <div class="dc-title">Irregular Schedules</div>
+          <div class="dc-teaser">Social jetlag is a real phenomenon.</div>
+          <div class="dc-expanded">
+            <div class="dc-exp-title" style="color:#10b981;">Social Jetlag</div>
+            <div class="dc-exp-body">Sleeping in on weekends and staying up late disrupts your circadian rhythm in the same way that flying across time zones does. Researchers call this social jetlag. Even a 1-2 hour shift in sleep timing on weekends is associated with higher rates of obesity, depression, and cardiovascular disease.</div>
+            <div class="dc-exp-stat" style="--dc-color:#10b981;">Affects 70% of the working population</div>
+          </div>
+          <button class="dc-close" onclick="closeDisruptor(event, this)">&#10005;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: MYTHS -->
+    <div class="slide" id="s5">
+      <div class="slide-header">
+        <div class="slide-tag">True or False</div>
+        <div class="slide-title">Common Sleep Myths</div>
+        <div class="slide-instruction">Select True or False for each statement.</div>
+      </div>
+      <div class="myths-list">
+        <div class="myth-item" id="myth-0">
+          <div class="myth-result-icon" id="myth-icon-0"></div>
+          <div class="myth-stmt">
+            "You can catch up on lost sleep by sleeping in at the weekend."
+            <div class="myth-feedback" id="myth-fb-0">False. While extra sleep can partially reduce sleepiness, research shows cognitive impairments from sleep debt cannot be fully reversed by weekend recovery sleep. Consistent sleep timing matters more than total hours.</div>
+          </div>
+          <div class="myth-btns">
+            <button class="myth-btn true-btn" onclick="checkMyth(0, true, false)">TRUE</button>
+            <button class="myth-btn false-btn" onclick="checkMyth(0, false, false)">FALSE</button>
+          </div>
+        </div>
+        <div class="myth-item" id="myth-1">
+          <div class="myth-result-icon" id="myth-icon-1"></div>
+          <div class="myth-stmt">
+            "Adults need 7 to 9 hours of sleep per night for optimal health."
+            <div class="myth-feedback" id="myth-fb-1">True. The National Sleep Foundation and American Academy of Sleep Medicine both recommend 7-9 hours for adults. Consistently sleeping less than 7 hours is associated with significantly increased risk of chronic disease.</div>
+          </div>
+          <div class="myth-btns">
+            <button class="myth-btn true-btn" onclick="checkMyth(1, true, true)">TRUE</button>
+            <button class="myth-btn false-btn" onclick="checkMyth(1, false, true)">FALSE</button>
+          </div>
+        </div>
+        <div class="myth-item" id="myth-2">
+          <div class="myth-result-icon" id="myth-icon-2"></div>
+          <div class="myth-stmt">
+            "Alcohol helps you sleep better because it makes you drowsy."
+            <div class="myth-feedback" id="myth-fb-2">False. While alcohol induces drowsiness, it suppresses REM sleep and causes sleep fragmentation in the second half of the night. You may fall asleep faster, but overall sleep quality is significantly reduced.</div>
+          </div>
+          <div class="myth-btns">
+            <button class="myth-btn true-btn" onclick="checkMyth(2, true, false)">TRUE</button>
+            <button class="myth-btn false-btn" onclick="checkMyth(2, false, false)">FALSE</button>
+          </div>
+        </div>
+      </div>
+      <div class="myths-score" id="myths-score"></div>
+    </div>
+
+    <!-- SLIDE 6: BODY MAP -->
+    <div class="slide" id="s6">
+      <div class="body-info-area">
+        <div class="body-info-header">
+          <div class="slide-tag">The Impact</div>
+          <div class="slide-title" style="font-family:Syne,sans-serif;font-size:20px;font-weight:700;color:white;">What Sleep Deprivation Does to Your Body</div>
+          <div class="slide-instruction">Click the highlighted areas to explore the effects.</div>
+        </div>
+        <div class="body-info-panel" id="body-panel">
+          <div class="bip-default" id="bip-default">Select an area on the body to see the effect of sleep deprivation.</div>
+          <div class="bip-content" id="bip-0" style="--bip-color:#6366f1;">
+            <div class="bip-organ">Brain and Cognition</div>
+            <div class="bip-subtitle">Memory, Focus, Decision Making</div>
+            <div class="bip-body">Sleep deprivation impairs the prefrontal cortex, reducing working memory, focus, and decision-making quality. After 17 hours awake, cognitive performance equals being legally drunk (0.05% BAC).</div>
+            <div class="bip-stat">17 hours awake equals 0.05% blood alcohol level</div>
+          </div>
+          <div class="bip-content" id="bip-1" style="--bip-color:#ef4444;">
+            <div class="bip-organ">Heart and Cardiovascular System</div>
+            <div class="bip-subtitle">Blood Pressure, Heart Rate, Risk</div>
+            <div class="bip-body">Chronic short sleep is associated with a 48% increased risk of heart disease. Blood pressure stays elevated longer, arterial inflammation increases, and the heart has less time to recover overnight.</div>
+            <div class="bip-stat">48% increased risk of heart disease</div>
+          </div>
+          <div class="bip-content" id="bip-2" style="--bip-color:#10b981;">
+            <div class="bip-organ">Immune System</div>
+            <div class="bip-subtitle">Infection Resistance, Recovery</div>
+            <div class="bip-body">People sleeping less than 7 hours are nearly 3 times more likely to catch a cold when exposed to the virus. Sleep is when the immune system produces cytokines, proteins that fight infection and inflammation.</div>
+            <div class="bip-stat">3x more likely to catch a cold</div>
+          </div>
+          <div class="bip-content" id="bip-3" style="--bip-color:#f59e0b;">
+            <div class="bip-organ">Metabolism and Weight</div>
+            <div class="bip-subtitle">Hunger Hormones, Blood Sugar</div>
+            <div class="bip-body">Sleep loss increases ghrelin (hunger hormone) and decreases leptin (satiety hormone), driving overeating. Even one week of short sleep can produce insulin resistance comparable to pre-diabetic states.</div>
+            <div class="bip-stat">Hunger increases by up to 24% after poor sleep</div>
+          </div>
+          <div class="bip-content" id="bip-4" style="--bip-color:#8b5cf6;">
+            <div class="bip-organ">Emotional Regulation</div>
+            <div class="bip-subtitle">Mood, Anxiety, Reactivity</div>
+            <div class="bip-body">The amygdala becomes 60% more reactive after one night of poor sleep. The connection between the amygdala and prefrontal cortex weakens, reducing your ability to regulate emotional responses and increasing anxiety.</div>
+            <div class="bip-stat">Amygdala reactivity increases 60%</div>
+          </div>
+        </div>
+        <div class="body-nav-dots">
+          <div class="body-nav-dot active" onclick="showBodyInfo(0)"></div>
+          <div class="body-nav-dot" onclick="showBodyInfo(1)"></div>
+          <div class="body-nav-dot" onclick="showBodyInfo(2)"></div>
+          <div class="body-nav-dot" onclick="showBodyInfo(3)"></div>
+          <div class="body-nav-dot" onclick="showBodyInfo(4)"></div>
+        </div>
+      </div>
+      <div class="body-map-wrap">
+        <div class="body-svg-wrap">
+          <svg width="160" height="380" viewBox="0 0 160 380" fill="none">
+            <!-- Head -->
+            <circle cx="80" cy="40" r="32" fill="#1e2d4a" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <!-- Eyes -->
+            <ellipse cx="68" cy="38" rx="5" ry="6" fill="#6366f1" opacity="0.8"/>
+            <ellipse cx="92" cy="38" rx="5" ry="6" fill="#6366f1" opacity="0.8"/>
+            <!-- Neck -->
+            <rect x="68" y="70" width="24" height="18" rx="4" fill="#1e2d4a" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <!-- Body -->
+            <rect x="36" y="86" width="88" height="110" rx="14" fill="#1e2d4a" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+            <!-- Heart area -->
+            <circle cx="68" cy="120" r="10" fill="rgba(239,68,68,0.15)" stroke="#ef4444" stroke-width="1" opacity="0.7"/>
+            <!-- Arms -->
+            <rect x="8" y="88" width="26" height="80" rx="10" fill="#1e2d4a" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <rect x="126" y="88" width="26" height="80" rx="10" fill="#1e2d4a" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <!-- Hands -->
+            <ellipse cx="21" cy="178" rx="13" ry="10" fill="#1e2d4a" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <ellipse cx="139" cy="178" rx="13" ry="10" fill="#1e2d4a" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <!-- Lower body -->
+            <rect x="40" y="194" width="80" height="80" rx="10" fill="#1e2d4a" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <!-- Legs -->
+            <rect x="42" y="272" width="34" height="90" rx="10" fill="#1e2d4a" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <rect x="84" y="272" width="34" height="90" rx="10" fill="#1e2d4a" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <!-- Feet -->
+            <ellipse cx="59" cy="366" rx="18" ry="10" fill="#1e2d4a" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <ellipse cx="101" cy="366" rx="18" ry="10" fill="#1e2d4a" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+          </svg>
+          <!-- Hotspots on body -->
+          <div class="body-hotspot" style="top:28px;left:66px;" onclick="showBodyInfo(0)">
+            <div class="body-hotspot-dot" style="background:#6366f1; animation-delay:0s;">B</div>
+          </div>
+          <div class="body-hotspot" style="top:108px;left:48px;" onclick="showBodyInfo(1)">
+            <div class="body-hotspot-dot" style="background:#ef4444; animation-delay:0.5s;">H</div>
+          </div>
+          <div class="body-hotspot" style="top:108px;left:96px;" onclick="showBodyInfo(2)">
+            <div class="body-hotspot-dot" style="background:#10b981; animation-delay:1s;">I</div>
+          </div>
+          <div class="body-hotspot" style="top:160px;left:72px;" onclick="showBodyInfo(3)">
+            <div class="body-hotspot-dot" style="background:#f59e0b; animation-delay:1.5s;">M</div>
+          </div>
+          <div class="body-hotspot" style="top:44px;left:110px;" onclick="showBodyInfo(4)">
+            <div class="body-hotspot-dot" style="background:#8b5cf6; animation-delay:2s;">E</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7: STRATEGIES -->
+    <div class="slide" id="s7">
+      <div class="slide-header">
+        <div class="slide-tag">Evidence-Based Solutions</div>
+        <div class="slide-title">5 Strategies Backed by the Research</div>
+      </div>
+      <div class="strategies-tabs">
+        <button class="strat-tab active" onclick="showStrat(0, this)">Sleep Timing</button>
+        <button class="strat-tab" onclick="showStrat(1, this)">Light Management</button>
+        <button class="strat-tab" onclick="showStrat(2, this)">Temperature</button>
+        <button class="strat-tab" onclick="showStrat(3, this)">Wind-Down Routine</button>
+        <button class="strat-tab" onclick="showStrat(4, this)">Cognitive Offloading</button>
+      </div>
+      <div class="strat-panels">
+        <div class="strat-panel active" id="strat-0">
+          <div class="strat-main">
+            <div class="strat-icon">&#9200;</div>
+            <div class="strat-title">Consistent Sleep Timing</div>
+            <div class="strat-body">Going to bed and waking at the same time every day, including weekends, is the single most impactful sleep hygiene intervention. Consistency anchors your circadian rhythm, reduces sleep onset time, and increases slow-wave sleep.</div>
+            <div class="strat-tip">Try this: Set a wake time and keep it for 2 weeks, even if you had a bad night. Sleep onset will improve naturally.</div>
+          </div>
+          <div class="strat-science">
+            <div class="strat-science-label">The Science</div>
+            <div class="strat-science-body">Chronobiology research shows that the timing of sleep matters as much as duration. Irregular sleep timing desynchronises peripheral clocks in organs from the central clock in the brain, producing metabolic and cognitive consequences similar to chronic shift work.</div>
+          </div>
+        </div>
+        <div class="strat-panel" id="strat-1">
+          <div class="strat-main">
+            <div class="strat-icon">&#128267;</div>
+            <div class="strat-title">Strategic Light Management</div>
+            <div class="strat-body">Get bright light exposure within 30 minutes of waking (outside is best). Dim indoor lights after 8pm and use blue-light filtering after sunset. This single intervention can advance melatonin onset by up to 90 minutes.</div>
+            <div class="strat-tip">Try this: Eat breakfast near a window or step outside for 10 minutes in the morning. Use warm-toned lamps in the evening.</div>
+          </div>
+          <div class="strat-science">
+            <div class="strat-science-label">The Science</div>
+            <div class="strat-science-body">The suprachiasmatic nucleus (SCN), your master clock, is reset daily by light exposure through the retinohypothalamic tract. Morning light suppresses residual melatonin and anchors cortisol timing. Evening light delays both signals, pushing sleep later.</div>
+          </div>
+        </div>
+        <div class="strat-panel" id="strat-2">
+          <div class="strat-main">
+            <div class="strat-icon">&#10052;</div>
+            <div class="strat-title">Bedroom Temperature</div>
+            <div class="strat-body">Your core body temperature needs to drop by 1 to 3 degrees Celsius to initiate and maintain sleep. A cooler bedroom accelerates this process. The optimal sleep temperature for most people is 16 to 19 degrees Celsius.</div>
+            <div class="strat-tip">Try this: Keep your bedroom between 16-19C. A warm bath or shower 1-2 hours before bed paradoxically accelerates sleep onset by drawing heat to the skin.</div>
+          </div>
+          <div class="strat-science">
+            <div class="strat-science-label">The Science</div>
+            <div class="strat-science-body">Sleep onset is tightly coupled to core temperature decline. Thermosensitive neurons in the hypothalamus detect this drop and promote slow-wave sleep. A warm bath works by vasodilation, pulling heat to the body surface and accelerating core cooling after you get out.</div>
+          </div>
+        </div>
+        <div class="strat-panel" id="strat-3">
+          <div class="strat-main">
+            <div class="strat-icon">&#127774;</div>
+            <div class="strat-title">A Consistent Wind-Down Routine</div>
+            <div class="strat-body">Your nervous system needs a transition from activation to deactivation. A 30 to 60 minute wind-down routine signals safety to the amygdala, reduces cortisol, and activates the parasympathetic nervous system, making sleep onset faster and deeper.</div>
+            <div class="strat-tip">Try this: Choose 2 to 3 calming activities (reading, light stretching, journalling) and do them in the same order every night. Predictability is the mechanism.</div>
+          </div>
+          <div class="strat-science">
+            <div class="strat-science-label">The Science</div>
+            <div class="strat-science-body">Sleep onset requires the transition from sympathetic (fight-or-flight) to parasympathetic (rest and digest) nervous system dominance. Conditioned relaxation cues, through consistent evening routines, create this shift more reliably than willpower or trying to force sleep directly.</div>
+          </div>
+        </div>
+        <div class="strat-panel" id="strat-4">
+          <div class="strat-main">
+            <div class="strat-icon">&#128221;</div>
+            <div class="strat-title">Cognitive Offloading</div>
+            <div class="strat-body">Rumination and racing thoughts are among the most common causes of sleep onset insomnia. Writing down tomorrow's tasks and concerns before bed reduces cognitive load and signal to the brain that the problem has been acknowledged and set aside.</div>
+            <div class="strat-tip">Try this: Spend 5 minutes writing a to-do list for tomorrow before bed. Research shows this reduces sleep onset time by an average of 9 minutes.</div>
+          </div>
+          <div class="strat-science">
+            <div class="strat-science-label">The Science</div>
+            <div class="strat-science-body">A 2018 study at Baylor University found that writing a specific to-do list before bed reduced sleep onset time by an average of 9 minutes compared to journalling about completed tasks. The specificity of the list was key, more specific planning produced faster sleep onset.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 8: QUIZ -->
+    <div class="slide" id="s8">
+      <div class="quiz-wrap" id="quiz-container">
+        <!-- Quiz rendered by JS -->
+      </div>
+    </div>
+
+    <!-- SLIDE 9: RESULTS -->
+    <div class="slide" id="s9">
+      <div class="results-glow" id="results-icon" style="background:rgba(108,63,197,0.2);">&#127881;</div>
+      <div class="results-title">Module Complete</div>
+      <div class="results-score" id="results-score" style="color:#6c3fc5;">0</div>
+      <div class="results-of">out of 3</div>
+      <div class="results-label">Sleep Science Knowledge Check</div>
+      <div class="results-msg" id="results-msg"></div>
+      <button class="restart-btn" onclick="restartModule()">Review Module</button>
+    </div>
+
+  </div>
+
+  <!-- BOTTOM BAR -->
+  <div class="bottombar">
+    <div class="progress-wrap">
+      <span class="progress-label" id="prog-label">Slide 1 of 9</span>
+      <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:11%"></div></div>
+    </div>
+    <div class="nav-btns">
+      <button class="nav-btn btn-prev" id="btn-prev" onclick="navigate(-1)" disabled>&#8592; Prev</button>
+      <button class="nav-btn btn-next" id="btn-next" onclick="navigate(1)">Next &#8594;</button>
+    </div>
+    <span class="slide-counter" id="slide-ctr">1 / 9</span>
+  </div>
+
+</div>
+
+<script>
+// State
+let current = 0;
+const TOTAL = 9;
+let stagesRevealed = 0;
+let mythsAnswered = 0;
+let quizAnswered = [false, false, false];
+let quizScore = 0;
+let currentQuiz = 0;
+
+// Generate stars
+(function() {
+  const container = document.getElementById("stars");
+  for (let i = 0; i < 80; i++) {
+    const s = document.createElement("div");
+    s.className = "star";
+    s.style.cssText = "left:" + Math.random()*100 + "%;top:" + Math.random()*100 + "%;--dur:" + (2+Math.random()*4) + "s;--delay:" + (Math.random()*4) + "s;--op:" + (0.2+Math.random()*0.7) + ";width:" + (1+Math.random()*2) + "px;height:" + (1+Math.random()*2) + "px;";
+    container.appendChild(s);
+  }
+})();
+
+// Navigation
+function navigate(dir) {
+  const next = current + dir;
+  if (next < 0 || next >= TOTAL) return;
+  goTo(next);
+}
+
+function goTo(idx) {
+  document.querySelectorAll(".slide").forEach(s => s.classList.remove("active"));
+  document.getElementById("s" + (idx+1)).classList.add("active");
+  current = idx;
+  updateBar();
+  if (idx === 7) renderQuiz();
+  if (idx === 8) renderResults();
+}
+
+function updateBar() {
+  const n = current + 1;
+  document.getElementById("prog-label").textContent = "Slide " + n + " of " + TOTAL;
+  document.getElementById("slide-ctr").textContent = n + " / " + TOTAL;
+  document.getElementById("prog-fill").style.width = (n/TOTAL*100) + "%";
+  document.getElementById("btn-prev").disabled = current === 0;
+  document.getElementById("btn-next").disabled = current === TOTAL-1;
+}
+
+// Slide 2: Sleep stages
+function revealStage(el, idx) {
+  if (el.classList.contains("revealed")) return;
+  el.classList.add("revealed");
+  stagesRevealed++;
+  document.getElementById("stages-count").textContent = stagesRevealed + " of 4 explored";
+  document.getElementById("stages-fill").style.width = (stagesRevealed/4*100) + "%";
+}
+
+// Slide 3: Clock
+function showClockInfo(idx, el) {
+  document.querySelectorAll(".hotspot").forEach(h => h.classList.remove("active"));
+  document.querySelectorAll(".cip-content").forEach(c => c.classList.remove("active"));
+  el.classList.add("active");
+  document.getElementById("cip-default").style.display = "none";
+  document.getElementById("cip-" + idx).classList.add("active");
+}
+
+// Slide 4: Disruptors
+function openDisruptor(el) {
+  if (el.classList.contains("open")) return;
+  document.querySelectorAll(".disruptor-card.open").forEach(c => {
+    c.classList.remove("open");
+  });
+  el.classList.add("open");
+}
+function closeDisruptor(e, btn) {
+  e.stopPropagation();
+  btn.closest(".disruptor-card").classList.remove("open");
+}
+
+// Slide 5: Myths
+function checkMyth(idx, selected, correct) {
+  const item = document.getElementById("myth-" + idx);
+  if (item.classList.contains("answered")) return;
+  item.classList.add("answered");
+  const btns = item.querySelectorAll(".myth-btn");
+  const trueBtn = item.querySelector(".true-btn");
+  const falseBtn = item.querySelector(".false-btn");
+  const isCorrect = selected === correct;
+  if (selected === true) trueBtn.classList.add(isCorrect ? "selected-correct" : "selected-wrong");
+  else falseBtn.classList.add(isCorrect ? "selected-correct" : "selected-wrong");
+  document.getElementById("myth-icon-" + idx).textContent = isCorrect ? "&#9989;" : "&#10060;";
+  if (isCorrect) mythsAnswered++;
+  document.getElementById("myths-score").textContent = "Score: " + mythsAnswered + " / 3";
+}
+
+// Slide 6: Body map
+function showBodyInfo(idx) {
+  document.querySelectorAll(".bip-content").forEach(b => b.classList.remove("active"));
+  document.querySelectorAll(".body-nav-dot").forEach(d => d.classList.remove("active"));
+  document.getElementById("bip-default").style.display = "none";
+  document.getElementById("bip-" + idx).classList.add("active");
+  document.querySelectorAll(".body-nav-dot")[idx].classList.add("active");
+  document.querySelectorAll(".body-hotspot").forEach((h,i) => {
+    h.classList.toggle("active", i === idx);
+  });
+}
+
+// Slide 7: Strategies
+function showStrat(idx, btn) {
+  document.querySelectorAll(".strat-tab").forEach(t => t.classList.remove("active"));
+  document.querySelectorAll(".strat-panel").forEach(p => p.classList.remove("active"));
+  btn.classList.add("active");
+  document.getElementById("strat-" + idx).classList.add("active");
+}
+
+// Quiz data
+const quizData = [
+  {
+    q: "Which sleep stage is most critical for emotional memory processing and mental health?",
+    scenario: null,
+    opts: ["Stage 1 (Light Sleep)", "Stage 2 (True Sleep)", "Stage 3 (Deep Sleep)", "REM Sleep"],
+    correct: 3,
+    feedback: ["Stage 1 is the lightest sleep stage and is not associated with emotional memory processing.", "Stage 2 accounts for much of total sleep time but is not primarily associated with emotional processing.", "Stage 3 is the most physically restorative stage but emotional memory consolidation primarily occurs in REM.", "Correct! REM sleep is where emotional memories are processed and consolidated. Disrupted REM is strongly linked to anxiety, depression, and impaired emotional regulation."]
+  },
+  {
+    q: "A colleague tells you they drink a coffee at 3pm every day to get through the afternoon. What is the most accurate statement about how this affects their sleep?",
+    scenario: "They say they have no trouble falling asleep at 11pm, so they assume the coffee has no effect.",
+    opts: ["They are correct: if they can fall asleep, the caffeine has no impact on sleep quality.", "Half the caffeine is still active at 8-9pm, likely reducing deep sleep even if they fall asleep normally.", "Caffeine only affects sleep if consumed after 5pm.", "The effect depends entirely on individual caffeine sensitivity."],
+    correct: 1,
+    feedback: ["Falling asleep does not mean sleep is unaffected. Caffeine can reduce slow-wave sleep even when sleep onset appears normal.", "Correct! With a 5-6 hour half-life, a 3pm coffee means significant caffeine remains at bedtime. Research shows this reduces slow-wave deep sleep even when people report falling asleep easily.", "Caffeine consumed as early as midday can affect sleep architecture, particularly deep sleep stages.", "While sensitivity varies, the pharmacological half-life of caffeine affects virtually all adults, and the effect on sleep architecture is well established."]
+  },
+  {
+    q: "Which of the following strategies has direct research evidence for reducing sleep onset time?",
+    scenario: null,
+    opts: ["Counting backwards from 300 before bed", "Writing a specific to-do list for the next day before bed", "Listening to white noise during sleep", "Taking melatonin supplements nightly"],
+    correct: 1,
+    feedback: ["There is no peer-reviewed evidence supporting this technique for reducing sleep onset time.", "Correct! A 2018 Baylor University study found that writing a specific to-do list before bed reduced sleep onset time by an average of 9 minutes, outperforming journalling about completed tasks.", "White noise may help in noisy environments but does not have strong evidence for reducing sleep onset time in quiet conditions.", "Melatonin supplements have evidence for circadian rhythm disorders and jet lag, but evidence for general sleep onset improvement in people without deficiency is mixed."]
+  }
+];
+
+function renderQuiz() {
+  const q = quizData[currentQuiz];
+  let html = '<div class="quiz-q-counter">Question ' + (currentQuiz+1) + ' of 3</div>';
+  html += '<div class="quiz-q-text">' + q.q + '</div>';
+  if (q.scenario) html += '<div class="quiz-q-scenario">' + q.scenario + '</div>';
+  html += '<div class="quiz-options-wrap" id="qopts">';
+  const letters = ["A","B","C","D"];
+  q.opts.forEach((opt, i) => {
+    html += '<div class="quiz-opt" onclick="checkQ(' + i + ')" id="qopt-' + i + '"><div class="q-opt-letter">' + letters[i] + '</div>' + opt + '</div>';
+  });
+  html += '</div>';
+  html += '<div class="quiz-feedback-box" id="qfeedback"></div>';
+  html += '<div class="quiz-nav"><button class="quiz-next-btn" id="qnext" onclick="nextQ()">' + (currentQuiz < 2 ? "Next Question" : "See Results") + '</button></div>';
+  document.getElementById("quiz-container").innerHTML = html;
+  document.getElementById("btn-next").disabled = true;
+}
+
+function checkQ(idx) {
+  if (quizAnswered[currentQuiz]) return;
+  quizAnswered[currentQuiz] = true;
+  const correct = quizData[currentQuiz].correct;
+  const isCorrect = idx === correct;
+  if (isCorrect) quizScore++;
+  document.querySelectorAll(".quiz-opt").forEach((o, i) => {
+    o.classList.add("disabled");
+    if (i === correct) o.classList.add("correct");
+    else if (i === idx && !isCorrect) o.classList.add("wrong");
+  });
+  const fb = document.getElementById("qfeedback");
+  fb.className = "quiz-feedback-box " + (isCorrect ? "qfb-correct" : "qfb-wrong");
+  fb.textContent = quizData[currentQuiz].feedback[idx];
+  fb.style.display = "block";
+  document.getElementById("qnext").classList.add("visible");
+}
+
+function nextQ() {
+  if (currentQuiz < 2) {
+    currentQuiz++;
+    renderQuiz();
+  } else {
+    goTo(8);
+  }
+}
+
+function renderResults() {
+  document.getElementById("results-score").textContent = quizScore + "/3";
+  let msg = "";
+  let color = "#6c3fc5";
+  let icon = "&#127881;";
+  if (quizScore === 3) {
+    color = "#10b981";
+    icon = "&#11088;";
+    msg = "Outstanding. You have demonstrated a strong understanding of sleep science, from sleep stages and circadian rhythms to the evidence-based strategies for improving sleep quality. Take this knowledge and put it into practice tonight.";
+  } else if (quizScore === 2) {
+    color = "#f59e0b";
+    icon = "&#127881;";
+    msg = "Good work. You have a solid grasp of sleep science fundamentals. Review the sections you found challenging, particularly around caffeine half-life and the evidence for specific sleep strategies.";
+  } else {
+    color = "#6366f1";
+    icon = "&#128218;";
+    msg = "Thank you for completing the module. Sleep science is a deep and nuanced field. We recommend reviewing the key slides before retrying the knowledge check.";
+  }
+  document.getElementById("results-score").style.color = color;
+  document.getElementById("results-icon").textContent = icon;
+  document.getElementById("results-msg").textContent = msg;
+}
+
+function restartModule() {
+  current = 0;
+  quizScore = 0;
+  currentQuiz = 0;
+  quizAnswered = [false, false, false];
+  stagesRevealed = 0;
+  mythsAnswered = 0;
+  goTo(0);
+}
+
+// Init body map
+showBodyInfo(0);
+updateBar();
+</script>
+</body>
+</html>

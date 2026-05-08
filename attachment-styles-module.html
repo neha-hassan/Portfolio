@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Understanding Your Attachment Style at Work</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Source Sans 3", sans-serif;
+  background: #1a1a2e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* STORYLINE SHELL */
+.sl-shell {
+  width: 960px;
+  background: #1a1a2e;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+/* STORYLINE TOP BAR */
+.sl-topbar {
+  background: #2d2d44;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.sl-title {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+.sl-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sl-ctrl-btn {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: transparent;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.6);
+  font-size: 11px;
+  transition: all 0.2s;
+}
+.sl-ctrl-btn:hover { background: rgba(255,255,255,0.1); color: white; }
+
+/* SLIDE AREA */
+.sl-slide {
+  width: 960px;
+  height: 540px;
+  background: #f0f0f0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+}
+
+/* LEFT SIDEBAR TABS */
+.sl-sidebar {
+  width: 200px;
+  background: #2c3e50;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.sl-sidebar-header {
+  background: #1a252f;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.sl-sidebar-title {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+
+.sl-tabs {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.sl-tab {
+  padding: 14px 16px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  position: relative;
+}
+
+.sl-tab:hover { background: rgba(255,255,255,0.07); }
+
+.sl-tab.active {
+  background: rgba(255,255,255,0.12);
+  border-left-color: #3498db;
+}
+
+.sl-tab-icon {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+  flex-shrink: 0;
+  color: white;
+}
+
+.tab-secure .sl-tab-icon { background: #27ae60; }
+.tab-anxious .sl-tab-icon { background: #e67e22; }
+.tab-avoidant .sl-tab-icon { background: #2980b9; }
+.tab-disorganised .sl-tab-icon { background: #8e44ad; }
+.tab-growing .sl-tab-icon { background: #16a085; }
+
+.sl-tab-label {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.3;
+}
+
+.sl-tab.active .sl-tab-label { color: white; font-weight: 600; }
+
+.sl-tab-check {
+  margin-left: auto;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 8px;
+  color: transparent;
+}
+
+.sl-tab.visited .sl-tab-check {
+  background: #27ae60;
+  border-color: #27ae60;
+  color: white;
+}
+
+/* MAIN CONTENT */
+.sl-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  overflow: hidden;
+}
+
+/* SLIDE HEADER */
+.sl-slide-header {
+  padding: 20px 28px 16px;
+  border-bottom: 2px solid #ecf0f1;
+  flex-shrink: 0;
+}
+
+.sl-module-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #95a5a6;
+  margin-bottom: 4px;
+}
+
+.sl-slide-title {
+  font-family: "Lato", sans-serif;
+  font-size: 22px;
+  font-weight: 300;
+  color: #2c3e50;
+  line-height: 1.2;
+}
+
+.sl-slide-title strong {
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+/* CONTENT PANELS */
+.sl-panels {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.sl-panel {
+  display: none;
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 28px;
+}
+
+.sl-panel.active { display: flex; gap: 20px; }
+
+/* PANEL LEFT */
+.panel-left {
+  flex: 1;
+}
+
+.attachment-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.badge-secure { background: #d5f5e3; color: #1e8449; }
+.badge-anxious { background: #fdebd0; color: #d35400; }
+.badge-avoidant { background: #d6eaf8; color: #1a5276; }
+.badge-disorganised { background: #e8daef; color: #6c3483; }
+.badge-growing { background: #d1f2eb; color: #0e6655; }
+
+.panel-body {
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: #4a4a4a;
+  margin-bottom: 16px;
+}
+
+/* TRAITS */
+.traits-heading {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #95a5a6;
+  margin-bottom: 8px;
+}
+
+.traits-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.trait-chip {
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+  text-align: center;
+}
+
+.chip-secure { background: #27ae60; }
+.chip-anxious { background: #e67e22; }
+.chip-avoidant { background: #2980b9; }
+.chip-disorganised { background: #8e44ad; }
+.chip-growing { background: #16a085; }
+
+/* PANEL RIGHT */
+.panel-right {
+  width: 160px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.character-wrap {
+  width: 140px; height: 160px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.character-svg {
+  width: 110px;
+  height: auto;
+}
+
+.reflection-box {
+  width: 100%;
+  background: #f8f9fa;
+  border: 1px solid #ecf0f1;
+  border-radius: 8px;
+  padding: 10px;
+  border-left: 3px solid #3498db;
+}
+
+.reflection-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #3498db;
+  margin-bottom: 4px;
+}
+
+.reflection-text {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #555;
+}
+
+/* KNOWLEDGE CHECK */
+.sl-quiz-panel {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 20px 28px;
+  background: #fafafa;
+}
+
+.sl-quiz-panel.active { display: flex; }
+
+.quiz-header {
+  margin-bottom: 20px;
+}
+
+.quiz-counter {
+  font-size: 11px;
+  font-weight: 600;
+  color: #95a5a6;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.quiz-question {
+  font-family: "Lato", sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  color: #2c3e50;
+  line-height: 1.4;
+}
+
+.quiz-scenario {
+  background: #eaf2f8;
+  border-left: 3px solid #3498db;
+  padding: 10px 14px;
+  border-radius: 4px;
+  font-size: 13px;
+  color: #2c3e50;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quiz-option {
+  padding: 11px 16px;
+  background: white;
+  border: 1.5px solid #dde;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13.5px;
+  color: #2c3e50;
+  transition: all 0.18s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quiz-option:hover { border-color: #3498db; background: #eaf2f8; }
+
+.quiz-option.correct {
+  border-color: #27ae60;
+  background: #d5f5e3;
+  color: #1e8449;
+}
+
+.quiz-option.incorrect {
+  border-color: #e74c3c;
+  background: #fdedec;
+  color: #922b21;
+}
+
+.quiz-option.disabled { pointer-events: none; }
+
+.option-letter {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid #ccc;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+  flex-shrink: 0;
+  color: #888;
+}
+
+.quiz-option.correct .option-letter {
+  background: #27ae60; border-color: #27ae60; color: white;
+}
+.quiz-option.incorrect .option-letter {
+  background: #e74c3c; border-color: #e74c3c; color: white;
+}
+
+.quiz-feedback {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.5;
+  display: none;
+}
+
+.feedback-correct {
+  background: #d5f5e3;
+  border-left: 3px solid #27ae60;
+  color: #1e8449;
+}
+
+.feedback-incorrect {
+  background: #fdedec;
+  border-left: 3px solid #e74c3c;
+  color: #922b21;
+}
+
+/* RESULTS */
+.sl-results {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  text-align: center;
+}
+
+.sl-results.active { display: flex; }
+
+.results-icon {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: #d5f5e3;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+
+.results-title {
+  font-family: "Lato", sans-serif;
+  font-size: 24px;
+  font-weight: 300;
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+.results-score {
+  font-size: 42px;
+  font-weight: 700;
+  color: #27ae60;
+  margin-bottom: 8px;
+  line-height: 1;
+}
+
+.results-subtitle {
+  font-size: 14px;
+  color: #7f8c8d;
+  margin-bottom: 24px;
+  max-width: 340px;
+}
+
+.results-msg {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 14px 20px;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.65;
+  max-width: 440px;
+  margin-bottom: 20px;
+}
+
+/* BOTTOM BAR */
+.sl-bottombar {
+  background: #2d2d44;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  flex-shrink: 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.sl-progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  max-width: 300px;
+}
+
+.sl-progress-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  white-space: nowrap;
+}
+
+.sl-progress-bar {
+  flex: 1;
+  height: 4px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.sl-progress-fill {
+  height: 100%;
+  background: #3498db;
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.sl-nav-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.sl-nav-btn {
+  padding: 7px 18px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.18s;
+  letter-spacing: 0.03em;
+}
+
+.sl-btn-prev {
+  background: transparent;
+  color: rgba(255,255,255,0.6);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.sl-btn-prev:hover { background: rgba(255,255,255,0.08); color: white; }
+
+.sl-btn-next {
+  background: #3498db;
+  color: white;
+}
+.sl-btn-next:hover { background: #2980b9; }
+.sl-btn-next:disabled { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.4); cursor: not-allowed; }
+
+.sl-slide-counter {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+}
+</style>
+</head>
+<body>
+
+<div class="sl-shell">
+
+  <!-- TOP BAR -->
+  <div class="sl-topbar">
+    <span class="sl-title">Understanding Your Attachment Style at Work</span>
+    <div class="sl-controls">
+      <button class="sl-ctrl-btn" title="Menu">&#9776;</button>
+      <button class="sl-ctrl-btn" title="Resources">&#9432;</button>
+      <button class="sl-ctrl-btn" title="Notes">&#128196;</button>
+    </div>
+  </div>
+
+  <!-- SLIDE -->
+  <div class="sl-slide">
+
+    <!-- SIDEBAR -->
+    <div class="sl-sidebar">
+      <div class="sl-sidebar-header">
+        <div class="sl-sidebar-title">Attachment Styles</div>
+      </div>
+      <div class="sl-tabs">
+        <div class="sl-tab tab-secure active" onclick="showTab(0)" id="tab-0">
+          <div class="sl-tab-icon">S</div>
+          <span class="sl-tab-label">Secure</span>
+          <div class="sl-tab-check">&#10003;</div>
+        </div>
+        <div class="sl-tab tab-anxious" onclick="showTab(1)" id="tab-1">
+          <div class="sl-tab-icon">A</div>
+          <span class="sl-tab-label">Anxious</span>
+          <div class="sl-tab-check">&#10003;</div>
+        </div>
+        <div class="sl-tab tab-avoidant" onclick="showTab(2)" id="tab-2">
+          <div class="sl-tab-icon">Av</div>
+          <span class="sl-tab-label">Avoidant</span>
+          <div class="sl-tab-check">&#10003;</div>
+        </div>
+        <div class="sl-tab tab-disorganised" onclick="showTab(3)" id="tab-3">
+          <div class="sl-tab-icon">D</div>
+          <span class="sl-tab-label">Disorganised</span>
+          <div class="sl-tab-check">&#10003;</div>
+        </div>
+        <div class="sl-tab tab-growing" onclick="showTab(4)" id="tab-4">
+          <div class="sl-tab-icon">G</div>
+          <span class="sl-tab-label">Growing</span>
+          <div class="sl-tab-check">&#10003;</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="sl-content">
+
+      <!-- SLIDE HEADER -->
+      <div class="sl-slide-header" id="slide-header">
+        <div class="sl-module-label">Attachment Theory in the Workplace</div>
+        <div class="sl-slide-title" id="slide-title">
+          <strong>Select an attachment style</strong> from the menu to explore how it shows up at work.
+        </div>
+      </div>
+
+      <!-- PANELS -->
+      <!-- SECURE -->
+      <div class="sl-panel active" id="panel-0">
+        <div class="panel-left">
+          <div class="attachment-badge badge-secure">Secure Attachment</div>
+          <p class="panel-body">People with a secure attachment style feel comfortable with both closeness and independence at work. They trust colleagues, communicate needs directly, and handle conflict without excessive anxiety or avoidance.<br><br>In the workplace, securely attached professionals tend to give and receive feedback well, maintain healthy boundaries, collaborate effectively, and recover from setbacks without prolonged distress.<br><br>Secure attachment is not about being perfect. It is about feeling fundamentally safe in relationships, even when things get difficult.</p>
+          <div class="traits-heading">Key traits at work</div>
+          <div class="traits-grid">
+            <div class="trait-chip chip-secure">Communicates openly</div>
+            <div class="trait-chip chip-secure">Handles feedback well</div>
+            <div class="trait-chip chip-secure">Manages conflict well</div>
+            <div class="trait-chip chip-secure">Trusts colleagues</div>
+          </div>
+        </div>
+        <div class="panel-right">
+          <div class="character-wrap" style="background:#d5f5e3;">
+            <svg class="character-svg" viewBox="0 0 100 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="30" r="20" fill="#27ae60" opacity="0.2"/>
+              <circle cx="50" cy="28" r="16" fill="#a9dfbf"/>
+              <ellipse cx="44" cy="26" rx="2.5" ry="3" fill="#2c3e50"/>
+              <ellipse cx="56" cy="26" rx="2.5" ry="3" fill="#2c3e50"/>
+              <path d="M44 34 Q50 39 56 34" stroke="#27ae60" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <rect x="30" y="50" width="40" height="50" rx="6" fill="#27ae60" opacity="0.7"/>
+              <line x1="50" y1="50" x2="50" y2="100" stroke="white" stroke-width="1" opacity="0.3"/>
+              <line x1="30" y1="70" x2="70" y2="70" stroke="white" stroke-width="1" opacity="0.3"/>
+              <rect x="35" y="100" width="12" height="35" rx="4" fill="#a9dfbf"/>
+              <rect x="53" y="100" width="12" height="35" rx="4" fill="#a9dfbf"/>
+              <line x1="30" y1="65" x2="15" y2="80" stroke="#a9dfbf" stroke-width="8" stroke-linecap="round"/>
+              <line x1="70" y1="65" x2="85" y2="80" stroke="#a9dfbf" stroke-width="8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="reflection-box">
+            <div class="reflection-label">Reflect</div>
+            <div class="reflection-text">Do you feel comfortable asking for help or setting limits at work?</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANXIOUS -->
+      <div class="sl-panel" id="panel-1">
+        <div class="panel-left">
+          <div class="attachment-badge badge-anxious">Anxious Attachment</div>
+          <p class="panel-body">People with an anxious attachment style crave closeness and reassurance at work but worry that others do not value them as much as they value others. This can show up as a strong need for approval and difficulty tolerating uncertainty.<br><br>In the workplace, anxiously attached professionals may read too much into a manager's tone, feel disproportionately affected by critical feedback, or seek frequent check-ins for reassurance.<br><br>With awareness, anxious attachment can be managed. The key is learning to build internal security rather than seeking it entirely from external validation.</p>
+          <div class="traits-heading">Key traits at work</div>
+          <div class="traits-grid">
+            <div class="trait-chip chip-anxious">Seeks reassurance</div>
+            <div class="trait-chip chip-anxious">Sensitive to feedback</div>
+            <div class="trait-chip chip-anxious">Over-communicates</div>
+            <div class="trait-chip chip-anxious">Fears disapproval</div>
+          </div>
+        </div>
+        <div class="panel-right">
+          <div class="character-wrap" style="background:#fdebd0;">
+            <svg class="character-svg" viewBox="0 0 100 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="28" r="16" fill="#f5cba7"/>
+              <ellipse cx="44" cy="27" rx="2.5" ry="3" fill="#2c3e50"/>
+              <ellipse cx="56" cy="27" rx="2.5" ry="3" fill="#2c3e50"/>
+              <path d="M44 35 Q50 33 56 35" stroke="#e67e22" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <line x1="42" y1="20" x2="40" y2="17" stroke="#2c3e50" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="58" y1="20" x2="60" y2="17" stroke="#2c3e50" stroke-width="1.5" stroke-linecap="round"/>
+              <rect x="32" y="50" width="36" height="48" rx="6" fill="#e67e22" opacity="0.7"/>
+              <rect x="37" y="100" width="10" height="36" rx="4" fill="#f5cba7"/>
+              <rect x="53" y="100" width="10" height="36" rx="4" fill="#f5cba7"/>
+              <line x1="32" y1="62" x2="18" y2="55" stroke="#f5cba7" stroke-width="8" stroke-linecap="round"/>
+              <line x1="68" y1="62" x2="80" y2="72" stroke="#f5cba7" stroke-width="8" stroke-linecap="round"/>
+              <rect x="72" y="60" width="18" height="14" rx="3" fill="white" opacity="0.9"/>
+              <line x1="75" y1="65" x2="87" y2="65" stroke="#e67e22" stroke-width="1.5"/>
+              <line x1="75" y1="69" x2="83" y2="69" stroke="#e67e22" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="reflection-box" style="border-left-color:#e67e22;">
+            <div class="reflection-label" style="color:#e67e22;">Reflect</div>
+            <div class="reflection-text">Do you find yourself checking in more than necessary after sending a message or making a decision?</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AVOIDANT -->
+      <div class="sl-panel" id="panel-2">
+        <div class="panel-left">
+          <div class="attachment-badge badge-avoidant">Avoidant Attachment</div>
+          <p class="panel-body">People with an avoidant attachment style value independence highly and feel uncomfortable with too much closeness or emotional expression at work. They tend to pull back when relationships feel too demanding and prefer to handle problems alone.<br><br>In the workplace, avoidantly attached professionals may seem cold or distant to colleagues, resist asking for help even when they need it, or shut down during emotionally charged conversations.<br><br>Avoidant attachment is not the same as introversion. It is a protective strategy, and with awareness it can be softened to allow for more genuine connection.</p>
+          <div class="traits-heading">Key traits at work</div>
+          <div class="traits-grid">
+            <div class="trait-chip chip-avoidant">Highly self-reliant</div>
+            <div class="trait-chip chip-avoidant">Uncomfortable with closeness</div>
+            <div class="trait-chip chip-avoidant">Withdraws under pressure</div>
+            <div class="trait-chip chip-avoidant">Resists asking for help</div>
+          </div>
+        </div>
+        <div class="panel-right">
+          <div class="character-wrap" style="background:#d6eaf8;">
+            <svg class="character-svg" viewBox="0 0 100 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="28" r="16" fill="#aed6f1"/>
+              <ellipse cx="44" cy="27" rx="2.5" ry="3" fill="#2c3e50"/>
+              <ellipse cx="56" cy="27" rx="2.5" ry="3" fill="#2c3e50"/>
+              <path d="M44 35 Q50 34 56 35" stroke="#7f8c8d" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <rect x="32" y="50" width="36" height="48" rx="6" fill="#2980b9" opacity="0.7"/>
+              <line x1="32" y1="74" x2="68" y2="74" stroke="white" stroke-width="1" opacity="0.3"/>
+              <rect x="37" y="98" width="10" height="38" rx="4" fill="#aed6f1"/>
+              <rect x="53" y="98" width="10" height="38" rx="4" fill="#aed6f1"/>
+              <line x1="32" y1="62" x2="20" y2="75" stroke="#aed6f1" stroke-width="8" stroke-linecap="round"/>
+              <line x1="68" y1="62" x2="80" y2="75" stroke="#aed6f1" stroke-width="8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="reflection-box" style="border-left-color:#2980b9;">
+            <div class="reflection-label" style="color:#2980b9;">Reflect</div>
+            <div class="reflection-text">When you are struggling at work, is your first instinct to handle it alone rather than reach out?</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DISORGANISED -->
+      <div class="sl-panel" id="panel-3">
+        <div class="panel-left">
+          <div class="attachment-badge badge-disorganised">Disorganised Attachment</div>
+          <p class="panel-body">Disorganised attachment involves a conflict between wanting closeness and fearing it at the same time. People with this style often had early experiences where caregivers were both a source of comfort and fear, leaving them without a consistent strategy for managing relationships.<br><br>In the workplace, this can show up as unpredictable behaviour, difficulty trusting others, heightened reactivity to perceived rejection, and feeling overwhelmed in emotionally complex situations.<br><br>Disorganised attachment is not a life sentence. With support, people can develop much more secure relational patterns over time.</p>
+          <div class="traits-heading">Key traits at work</div>
+          <div class="traits-grid">
+            <div class="trait-chip chip-disorganised">Conflicted about closeness</div>
+            <div class="trait-chip chip-disorganised">Unpredictable in relationships</div>
+            <div class="trait-chip chip-disorganised">Reactive to rejection</div>
+            <div class="trait-chip chip-disorganised">Benefits from support</div>
+          </div>
+        </div>
+        <div class="panel-right">
+          <div class="character-wrap" style="background:#e8daef;">
+            <svg class="character-svg" viewBox="0 0 100 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="28" r="16" fill="#d2b4de"/>
+              <ellipse cx="44" cy="27" rx="2.5" ry="3" fill="#2c3e50"/>
+              <ellipse cx="56" cy="27" rx="2.5" ry="3" fill="#2c3e50"/>
+              <path d="M44 36 Q47 33 50 35 Q53 37 56 34" stroke="#8e44ad" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <rect x="32" y="50" width="36" height="48" rx="6" fill="#8e44ad" opacity="0.6"/>
+              <rect x="37" y="98" width="10" height="38" rx="4" fill="#d2b4de"/>
+              <rect x="53" y="98" width="10" height="38" rx="4" fill="#d2b4de"/>
+              <line x1="32" y1="62" x2="16" y2="58" stroke="#d2b4de" stroke-width="8" stroke-linecap="round"/>
+              <line x1="68" y1="62" x2="82" y2="68" stroke="#d2b4de" stroke-width="8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="reflection-box" style="border-left-color:#8e44ad;">
+            <div class="reflection-label" style="color:#8e44ad;">Reflect</div>
+            <div class="reflection-text">Do you sometimes push people away and then regret it, or feel pulled between wanting connection and fearing it?</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GROWING -->
+      <div class="sl-panel" id="panel-4">
+        <div class="panel-left">
+          <div class="attachment-badge badge-growing">Moving Towards Secure</div>
+          <p class="panel-body">Attachment styles are not fixed. Research in adult attachment theory shows that people can develop more secure patterns over time through meaningful relationships, therapy, coaching, and deliberate self-awareness.<br><br>This process is called earned security. It does not require a perfect past. It requires consistent experiences of being heard, supported, and safe, which can happen at any age and at any stage of your career.<br><br>Awareness is always the first step. The fact that you are here, exploring this, already puts you ahead.</p>
+          <div class="traits-heading">Building earned security</div>
+          <div class="traits-grid">
+            <div class="trait-chip chip-growing">Growth is possible</div>
+            <div class="trait-chip chip-growing">Self-awareness first</div>
+            <div class="trait-chip chip-growing">Relationships heal</div>
+            <div class="trait-chip chip-growing">Any age, any stage</div>
+          </div>
+        </div>
+        <div class="panel-right">
+          <div class="character-wrap" style="background:#d1f2eb;">
+            <svg class="character-svg" viewBox="0 0 100 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="28" r="16" fill="#a2d9ce"/>
+              <ellipse cx="44" cy="27" rx="2.5" ry="3" fill="#2c3e50"/>
+              <ellipse cx="56" cy="27" rx="2.5" ry="3" fill="#2c3e50"/>
+              <path d="M43 34 Q50 40 57 34" stroke="#16a085" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <rect x="30" y="50" width="40" height="50" rx="6" fill="#16a085" opacity="0.7"/>
+              <rect x="35" y="100" width="12" height="35" rx="4" fill="#a2d9ce"/>
+              <rect x="53" y="100" width="12" height="35" rx="4" fill="#a2d9ce"/>
+              <line x1="30" y1="63" x2="14" y2="55" stroke="#a2d9ce" stroke-width="8" stroke-linecap="round"/>
+              <line x1="70" y1="63" x2="86" y2="55" stroke="#a2d9ce" stroke-width="8" stroke-linecap="round"/>
+              <circle cx="75" cy="25" r="12" fill="#f39c12" opacity="0.9"/>
+              <path d="M75 18 L77 23 L82 23 L78 27 L80 32 L75 29 L70 32 L72 27 L68 23 L73 23 Z" fill="white" opacity="0.9"/>
+            </svg>
+          </div>
+          <div class="reflection-box" style="border-left-color:#16a085;">
+            <div class="reflection-label" style="color:#16a085;">Reflect</div>
+            <div class="reflection-text">What is one step you could take this week to build more security in a work relationship?</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- QUIZ PANELS -->
+      <div class="sl-quiz-panel" id="quiz-0">
+        <div class="quiz-header">
+          <div class="quiz-counter">Knowledge Check: Question 1 of 3</div>
+          <div class="quiz-question">Which attachment style is associated with comfort in both closeness and independence at work?</div>
+        </div>
+        <div class="quiz-options" id="quiz-opts-0">
+          <div class="quiz-option" onclick="checkAnswer(this, false, 0, 'Anxious attachment involves a strong need for reassurance and approval, not comfort with independence.')">
+            <div class="option-letter">A</div>Anxious
+          </div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 0, 'Avoidant attachment involves discomfort with closeness, not comfort with both closeness and independence.')">
+            <div class="option-letter">B</div>Avoidant
+          </div>
+          <div class="quiz-option" onclick="checkAnswer(this, true, 0, 'Correct! Securely attached professionals feel comfortable with both closeness and independence, trust colleagues, and handle feedback and conflict constructively.')">
+            <div class="option-letter">C</div>Secure
+          </div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 0, 'Disorganised attachment involves a conflict between wanting and fearing closeness, not comfort with both.')">
+            <div class="option-letter">D</div>Disorganised
+          </div>
+        </div>
+        <div class="quiz-feedback" id="feedback-0"></div>
+      </div>
+
+      <div class="sl-quiz-panel" id="quiz-1">
+        <div class="quiz-header">
+          <div class="quiz-counter">Knowledge Check: Question 2 of 3</div>
+          <div class="quiz-question">A colleague frequently seeks reassurance and feels distressed after receiving feedback. This is most consistent with which attachment style?</div>
+        </div>
+        <div class="quiz-scenario">Scenario: After a team meeting, your colleague sends three follow-up messages asking if the manager seemed unhappy with their contribution, even though the feedback was neutral.</div>
+        <div class="quiz-options" id="quiz-opts-1">
+          <div class="quiz-option" onclick="checkAnswer(this, false, 1, 'Secure attachment involves comfort with feedback and trust in relationships, not heightened anxiety after neutral feedback.')">
+            <div class="option-letter">A</div>Secure
+          </div>
+          <div class="quiz-option" onclick="checkAnswer(this, true, 1, 'Correct! This behaviour is consistent with anxious attachment: seeking reassurance, over-analysing others\'s responses, and feeling disproportionately affected by neutral or critical feedback.')">
+            <div class="option-letter">B</div>Anxious
+          </div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 1, 'Avoidant attachment involves withdrawal and self-reliance, not seeking reassurance from others.')">
+            <div class="option-letter">C</div>Avoidant
+          </div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 1, 'While disorganised attachment involves reactivity, the consistent pattern of reassurance-seeking here is most characteristic of anxious attachment.')">
+            <div class="option-letter">D</div>Disorganised
+          </div>
+        </div>
+        <div class="quiz-feedback" id="feedback-1"></div>
+      </div>
+
+      <div class="sl-quiz-panel" id="quiz-2">
+        <div class="quiz-header">
+          <div class="quiz-counter">Knowledge Check: Question 3 of 3</div>
+          <div class="quiz-question">Which of the following best describes "earned security"?</div>
+        </div>
+        <div class="quiz-options" id="quiz-opts-2">
+          <div class="quiz-option" onclick="checkAnswer(this, false, 2, 'Earned security is not about childhood. It can develop at any age through meaningful relationships and self-awareness.')">
+            <div class="option-letter">A</div>A secure attachment style that develops only in childhood
+          </div>
+          <div class="quiz-option" onclick="checkAnswer(this, true, 2, 'Correct! Earned security describes the process of developing more secure attachment patterns over time through meaningful relationships, therapy, coaching, and deliberate self-awareness, regardless of early experiences.')">
+            <div class="option-letter">B</div>Developing more secure patterns through relationships and self-awareness over time
+          </div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 2, 'Earned security is not about eliminating insecure behaviours. It is about building genuine security through experience and awareness.')">
+            <div class="option-letter">C</div>Eliminating all insecure attachment behaviours permanently
+          </div>
+          <div class="quiz-option" onclick="checkAnswer(this, false, 2, 'Earned security can develop at any age, not only through early childhood experiences.')">
+            <div class="option-letter">D</div>Only possible for people with stable early childhood experiences
+          </div>
+        </div>
+        <div class="quiz-feedback" id="feedback-2"></div>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="sl-results" id="results">
+        <div class="results-icon">&#127881;</div>
+        <div class="results-title">Module Complete</div>
+        <div class="results-score" id="score-display">3/3</div>
+        <div class="results-subtitle">You have completed Understanding Your Attachment Style at Work</div>
+        <div class="results-msg" id="results-msg">Excellent work. You have demonstrated a strong understanding of the four attachment styles and how they show up in professional relationships. Remember: awareness is always the first step toward earned security.</div>
+        <button class="sl-nav-btn sl-btn-next" onclick="restart()" style="padding:10px 28px; border-radius:4px; font-size:13px;">Review Module</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BOTTOM BAR -->
+  <div class="sl-bottombar">
+    <div class="sl-progress-wrap">
+      <span class="sl-progress-label" id="progress-label">Slide 1 of 8</span>
+      <div class="sl-progress-bar">
+        <div class="sl-progress-fill" id="progress-fill" style="width:12.5%"></div>
+      </div>
+    </div>
+    <div class="sl-nav-btns">
+      <button class="sl-nav-btn sl-btn-prev" id="btn-prev" onclick="navigate(-1)" disabled>&#8592; Prev</button>
+      <button class="sl-nav-btn sl-btn-next" id="btn-next" onclick="navigate(1)">Next &#8594;</button>
+    </div>
+    <span class="sl-slide-counter" id="slide-counter">1 / 8</span>
+  </div>
+
+</div>
+
+<script>
+// State
+let currentSlide = 0;
+let quizScore = 0;
+let quizAnswered = [false, false, false];
+const TOTAL_SLIDES = 8; // 5 tabs + 3 quiz + 1 results = 9 states, 0-indexed to 8
+
+const tabData = [
+  { title: "<strong>Secure Attachment</strong> &mdash; comfort with closeness and independence", panel: "panel-0" },
+  { title: "<strong>Anxious Attachment</strong> &mdash; seeking closeness, fearing rejection", panel: "panel-1" },
+  { title: "<strong>Avoidant Attachment</strong> &mdash; valuing independence over connection", panel: "panel-2" },
+  { title: "<strong>Disorganised Attachment</strong> &mdash; conflicted between closeness and fear", panel: "panel-3" },
+  { title: "<strong>Moving Towards Secure</strong> &mdash; earned security is possible", panel: "panel-4" },
+];
+
+function showTab(idx) {
+  // Deactivate all tabs
+  document.querySelectorAll(".sl-tab").forEach(t => t.classList.remove("active"));
+  document.querySelectorAll(".sl-panel").forEach(p => p.classList.remove("active"));
+
+  // Activate selected
+  document.getElementById("tab-" + idx).classList.add("active");
+  document.getElementById("tab-" + idx).classList.add("visited");
+  document.getElementById("panel-" + idx).classList.add("active");
+
+  // Update header
+  document.getElementById("slide-title").innerHTML = tabData[idx].title;
+
+  currentSlide = idx;
+  updateNav();
+}
+
+function navigate(dir) {
+  const next = currentSlide + dir;
+
+  if (next < 0) return;
+
+  // Slides 0-4: tabs
+  // Slides 5-7: quiz questions
+  // Slide 8: results
+
+  if (next <= 4) {
+    showTabSlide(next);
+  } else if (next <= 7) {
+    showQuiz(next - 5);
+    currentSlide = next;
+    updateNav();
+  } else if (next === 8) {
+    showResults();
+    currentSlide = 8;
+    updateNav();
+  }
+}
+
+function showTabSlide(idx) {
+  // Hide quiz and results
+  document.querySelectorAll(".sl-quiz-panel").forEach(q => q.classList.remove("active"));
+  document.getElementById("results").classList.remove("active");
+  document.getElementById("slide-header").style.display = "";
+
+  showTab(idx);
+}
+
+function showQuiz(qIdx) {
+  // Hide tabs and results
+  document.querySelectorAll(".sl-panel").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".sl-tab").forEach(t => t.classList.remove("active"));
+  document.querySelectorAll(".sl-quiz-panel").forEach(q => q.classList.remove("active"));
+  document.getElementById("results").classList.remove("active");
+
+  document.getElementById("slide-header").style.display = "none";
+  document.getElementById("quiz-" + qIdx).classList.add("active");
+
+  // Update nav - disable next if not answered
+  document.getElementById("btn-next").disabled = !quizAnswered[qIdx];
+}
+
+function checkAnswer(el, isCorrect, qIdx, feedback) {
+  if (quizAnswered[qIdx]) return;
+  quizAnswered[qIdx] = true;
+
+  // Disable all options
+  document.querySelectorAll("#quiz-opts-" + qIdx + " .quiz-option").forEach(o => {
+    o.classList.add("disabled");
+    o.style.opacity = "0.6";
+  });
+
+  el.style.opacity = "1";
+
+  if (isCorrect) {
+    el.classList.add("correct");
+    quizScore++;
+  } else {
+    el.classList.add("incorrect");
+    // Show correct answer
+    document.querySelectorAll("#quiz-opts-" + qIdx + " .quiz-option").forEach(o => {
+      if (o.getAttribute("onclick") && o.getAttribute("onclick").includes("true")) {
+        o.classList.add("correct");
+        o.style.opacity = "1";
+      }
+    });
+  }
+
+  // Show feedback
+  const fb = document.getElementById("feedback-" + qIdx);
+  fb.style.display = "block";
+  fb.className = "quiz-feedback " + (isCorrect ? "feedback-correct" : "feedback-incorrect");
+  fb.textContent = feedback;
+
+  // Enable next
+  document.getElementById("btn-next").disabled = false;
+}
+
+function showResults() {
+  document.querySelectorAll(".sl-panel").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".sl-quiz-panel").forEach(q => q.classList.remove("active"));
+  document.getElementById("slide-header").style.display = "none";
+  document.getElementById("results").classList.add("active");
+
+  document.getElementById("score-display").textContent = quizScore + "/3";
+
+  let msg = "";
+  if (quizScore === 3) {
+    msg = "Excellent work. You have demonstrated a strong understanding of the four attachment styles and how they show up in professional relationships. Remember: awareness is always the first step toward earned security.";
+    document.getElementById("score-display").style.color = "#27ae60";
+  } else if (quizScore === 2) {
+    msg = "Good work. You have a solid grasp of the key attachment styles. Consider revisiting the module to strengthen your understanding of the areas you found challenging.";
+    document.getElementById("score-display").style.color = "#e67e22";
+  } else {
+    msg = "Thank you for completing the module. We recommend reviewing the attachment style content before retrying the knowledge check.";
+    document.getElementById("score-display").style.color = "#e74c3c";
+  }
+  document.getElementById("results-msg").textContent = msg;
+
+  document.getElementById("btn-next").disabled = true;
+}
+
+function updateNav() {
+  const prev = document.getElementById("btn-prev");
+  const next = document.getElementById("btn-next");
+  const label = document.getElementById("progress-label");
+  const fill = document.getElementById("progress-fill");
+  const counter = document.getElementById("slide-counter");
+
+  prev.disabled = currentSlide === 0;
+
+  if (currentSlide >= 5 && currentSlide <= 7) {
+    next.disabled = !quizAnswered[currentSlide - 5];
+  } else if (currentSlide === 8) {
+    next.disabled = true;
+  } else {
+    next.disabled = false;
+  }
+
+  const slideNum = currentSlide + 1;
+  const totalDisplay = TOTAL_SLIDES;
+  label.textContent = "Slide " + slideNum + " of " + totalDisplay;
+  counter.textContent = slideNum + " / " + totalDisplay;
+  fill.style.width = ((slideNum / totalDisplay) * 100) + "%";
+}
+
+function restart() {
+  quizScore = 0;
+  quizAnswered = [false, false, false];
+
+  // Reset quiz options
+  for (let i = 0; i < 3; i++) {
+    document.querySelectorAll("#quiz-opts-" + i + " .quiz-option").forEach(o => {
+      o.classList.remove("correct", "incorrect", "disabled");
+      o.style.opacity = "1";
+    });
+    const fb = document.getElementById("feedback-" + i);
+    fb.style.display = "none";
+  }
+
+  document.getElementById("slide-header").style.display = "";
+  showTabSlide(0);
+}
+
+// Init
+updateNav();
+</script>
+</body>
+</html>
