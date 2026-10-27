@@ -1,0 +1,132 @@
+<?xml version="1.0" ?>
+<manifest identifier="AwMeBnz-FGSruqRJm8IgZDjf_rz_yWxRUNQq8Nya" version="1"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+    <adlcp:location>metadata.xml</adlcp:location> 
+  </metadata>
+  <organizations default="articulate_rise">
+      <organization identifier="articulate_rise">
+      <title>Drug &amp; Alcohol Masterclass for Managers</title>
+      <item identifier="i1" identifierref="r1" isvisible="true">
+        <title>Drug &amp; Alcohol Masterclass for Managers</title>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="r1" type="webcontent" adlcp:scormtype="sco" href="scormdriver/indexAPI.html">
+      <!-- SCORMDRIVER STUFF -->
+      <file href="scormdriver/indexAPI.html" />
+      <file href="scormdriver/preloadIntegrity.js" />
+      <file href="scormdriver/driverOptions.js" />
+      <file href="scormdriver/AICCComm.html" />
+      <file href="scormdriver/auto-scripts/AutoBookmark.js" />
+      <file href="scormdriver/auto-scripts/AutoCompleteSCO.js" />
+      <file href="scormdriver/auto-scripts/CourseExit.js" />
+      <file href="scormdriver/blank.html" />
+      <file href="scormdriver/goodbye.html" />
+      <file href="scormdriver/scormdriver.js" />
+      <file href="scormdriver/browsersniff.js" />
+
+      <!-- RUNTIME COMMON STUFF -->
+      <file href="scormcontent/index.html" />
+
+      
+        <file href="scormcontent/lib/lzwcompress.js"/>
+      
+
+      <!-- FRONTEND BUNDLE ASSETS -->
+      <file href="scormcontent/lib/rise/373f34fd.js" />
+<file href="scormcontent/lib/rise/220a9314.css" />
+<file href="scormcontent/lib/rise/72616ff5.js" />
+<file href="scormcontent/lib/rise/951af891.css" />
+<file href="scormcontent/lib/rise/69d6c197.js" />
+<file href="scormcontent/lib/rise/9aede266.ttf" />
+<file href="scormcontent/lib/rise/bff47411.woff" />
+<file href="scormcontent/lib/rise/ca69a9b5.js" />
+<file href="scormcontent/lib/rise/587a1be7.js" />
+<file href="scormcontent/lib/rise/61243a87.js" />
+<file href="scormcontent/lib/rise/5f9c97d0.js" />
+<file href="scormcontent/lib/rise/3125981b.js" />
+<file href="scormcontent/lib/rise/077fcf07.js" />
+<file href="scormcontent/lib/rise/641ea9f0.js" />
+<file href="scormcontent/lib/rise/e5655677.js" />
+<file href="scormcontent/lib/rise/b38dd3bc.js" />
+<file href="scormcontent/lib/rise/64c13194.js" />
+<file href="scormcontent/lib/rise/2975f71c.js" />
+<file href="scormcontent/lib/rise/578ab21f.js" />
+<file href="scormcontent/lib/rise/90f65467.js" />
+<file href="scormcontent/lib/rise/2d62667c.js" />
+<file href="scormcontent/lib/rise/54010a1a.js" />
+<file href="scormcontent/lib/rise/8716f7be.js" />
+<file href="scormcontent/lib/rise/d878a260.js" />
+<file href="scormcontent/lib/rise/61c7bf33.js" />
+<file href="scormcontent/lib/rise/26eb66fd.js" />
+<file href="scormcontent/lib/learn_dist/entry.js" />
+<file href="scormcontent/lib/learn_dist/20fb5bfb.js" />
+<file href="scormcontent/lib/learn_dist/5d38ab37.css" />
+<file href="scormcontent/lib/learn_dist/cce489fb.js" />
+<file href="scormcontent/lib/mondrian/entry.js" />
+<file href="scormcontent/lib/mondrian/651f6318.js" />
+<file href="scormcontent/lib/mondrian/afbb5ca8.js" />
+<file href="scormcontent/lib/mondrian/81b7fea8.js" />
+<file href="scormcontent/lib/mondrian/09e37aee.js" />
+<file href="scormcontent/lib/mondrian/196251cf.js" />
+<file href="scormcontent/lib/sandbox/sandbox.html" />
+<file href="scormcontent/lib/sandbox/c77685df.js" />
+<file href="scormcontent/lib/sandbox/4adfab46.css" />
+
+
+      <!-- RUNTIME CONTENT STUFF -->
+      <file href="scormcontent/lib/fonts/Lato2-Regular.woff" />
+<file href="scormcontent/lib/fonts/Lato2-Light.woff" />
+<file href="scormcontent/lib/fonts/Lato2-Italic.woff" />
+<file href="scormcontent/lib/fonts/Lato2-Bold.woff" />
+<file href="scormcontent/lib/fonts/Lato2-Black.woff" />
+<file href="scormcontent/lib/fonts/Merriweather-Black.woff" />
+<file href="scormcontent/lib/fonts/Merriweather-Italic.woff" />
+<file href="scormcontent/lib/fonts/Merriweather-Bold.woff" />
+<file href="scormcontent/lib/fonts/Merriweather-Regular.woff" />
+<file href="scormcontent/lib/fonts/Merriweather-Light.woff" />
+<file href="scormcontent/assets/yjq8gtsjrf7p4jHs.jpg" />
+<file href="scormcontent/assets/workplace-safety.jpg" />
+<file href="scormcontent/assets/ElevenLabs_2026-03-25T10_5.mp3" />
+<file href="scormcontent/assets/quote_background.jpg" />
+<file href="scormcontent/assets/Duty-of-care-in-the-workpl.jpg" />
+<file href="scormcontent/assets/ElevenLabs_2026-03-25T11_0.mp3" />
+<file href="scormcontent/assets/mcbUZc/mountains.jpg" />
+<file href="scormcontent/assets/L8RxBr/ElevenLabs_2026-03-25T11_0.mp3" />
+<file href="scormcontent/assets/drug-and-alcohol-testing-i.jpg" />
+<file href="scormcontent/assets/wmremove-transformed.jpg" />
+<file href="scormcontent/assets/_RgVM1/ElevenLabs_2026-03-25T11_0.mp3" />
+<file href="scormcontent/assets/workplace-drug-testing.jpg" />
+<file href="scormcontent/assets/ElevenLabs_2026-03-25T11_1.mp3" />
+<file href="scormcontent/assets/onset-cut-off-levels_qCg78.mp3" />
+<file href="scormcontent/assets/onset-cut-off-levels_F7kIh.mp3" />
+<file href="scormcontent/assets/wmremove-transformed%20%28.jpg" />
+<file href="scormcontent/assets/ElevenLabs_2026-03-25T11_2.mp3" />
+<file href="scormcontent/assets/a-person-under-the-influen.jpg" />
+<file href="scormcontent/assets/opiates.jpg" />
+<file href="scormcontent/assets/Amphetamine-%26-Methamphet.jpg" />
+<file href="scormcontent/assets/istock-red-eyes.jpg" />
+<file href="scormcontent/assets/cocaine-symptoms.jpg" />
+<file href="scormcontent/assets/Benzodiazepine-.jpg" />
+<file href="scormcontent/assets/MXmC47/ElevenLabs_2026-03-25T11_2.mp3" />
+<file href="scormcontent/assets/medicinal-cannabis-.jpg" />
+<file href="scormcontent/assets/laboratory-testing-for-dru.jpg" />
+<file href="scormcontent/assets/ElevenLabs_2026-03-25T11_3.mp3" />
+<file href="scormcontent/assets/JZgABL/ElevenLabs_2026-03-25T11_3.mp3" />
+<file href="scormcontent/assets/Interpretation-of-laborato.jpg" />
+<file href="scormcontent/assets/Ma8Dx6/ElevenLabs_2026-03-25T11_3.mp3" />
+<file href="scormcontent/assets/Gemini_Generated_Image_fss.jpg" />
+<file href="scormcontent/assets/31tLvK/ElevenLabs_2026-03-25T11_3.mp3" />
+<file href="scormcontent/assets/own9-kM-8PgojxqD.jpg" />
+
+    </resource>
+  </resources>
+</manifest>

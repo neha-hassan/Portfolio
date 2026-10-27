@@ -1,0 +1,130 @@
+<?xml version="1.0" ?>
+<manifest identifier="fMfd155RsNOqXoo-QBLbbg1JjqONYP91KuFEoxzq" version="1"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+    <adlcp:location>metadata.xml</adlcp:location> 
+  </metadata>
+  <organizations default="articulate_rise">
+      <organization identifier="articulate_rise">
+      <title>DASA|How to identify and approach an intoxicated worker</title>
+      <item identifier="i1" identifierref="r1" isvisible="true">
+        <title>DASA|How to identify and approach an intoxicated worker</title>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="r1" type="webcontent" adlcp:scormtype="sco" href="scormdriver/indexAPI.html">
+      <!-- SCORMDRIVER STUFF -->
+      <file href="scormdriver/indexAPI.html" />
+      <file href="scormdriver/preloadIntegrity.js" />
+      <file href="scormdriver/driverOptions.js" />
+      <file href="scormdriver/AICCComm.html" />
+      <file href="scormdriver/auto-scripts/AutoBookmark.js" />
+      <file href="scormdriver/auto-scripts/AutoCompleteSCO.js" />
+      <file href="scormdriver/auto-scripts/CourseExit.js" />
+      <file href="scormdriver/blank.html" />
+      <file href="scormdriver/goodbye.html" />
+      <file href="scormdriver/scormdriver.js" />
+      <file href="scormdriver/browsersniff.js" />
+
+      <!-- RUNTIME COMMON STUFF -->
+      <file href="scormcontent/index.html" />
+
+      
+        <file href="scormcontent/lib/lzwcompress.js"/>
+      
+
+      <!-- FRONTEND BUNDLE ASSETS -->
+      <file href="scormcontent/lib/rise/373f34fd.js" />
+<file href="scormcontent/lib/rise/220a9314.css" />
+<file href="scormcontent/lib/rise/72616ff5.js" />
+<file href="scormcontent/lib/rise/951af891.css" />
+<file href="scormcontent/lib/rise/69d6c197.js" />
+<file href="scormcontent/lib/rise/9aede266.ttf" />
+<file href="scormcontent/lib/rise/bff47411.woff" />
+<file href="scormcontent/lib/rise/ca69a9b5.js" />
+<file href="scormcontent/lib/rise/587a1be7.js" />
+<file href="scormcontent/lib/rise/61243a87.js" />
+<file href="scormcontent/lib/rise/5f9c97d0.js" />
+<file href="scormcontent/lib/rise/3125981b.js" />
+<file href="scormcontent/lib/rise/077fcf07.js" />
+<file href="scormcontent/lib/rise/641ea9f0.js" />
+<file href="scormcontent/lib/rise/e5655677.js" />
+<file href="scormcontent/lib/rise/b38dd3bc.js" />
+<file href="scormcontent/lib/rise/64c13194.js" />
+<file href="scormcontent/lib/rise/2975f71c.js" />
+<file href="scormcontent/lib/rise/578ab21f.js" />
+<file href="scormcontent/lib/rise/90f65467.js" />
+<file href="scormcontent/lib/rise/2d62667c.js" />
+<file href="scormcontent/lib/rise/54010a1a.js" />
+<file href="scormcontent/lib/rise/8716f7be.js" />
+<file href="scormcontent/lib/rise/d878a260.js" />
+<file href="scormcontent/lib/rise/61c7bf33.js" />
+<file href="scormcontent/lib/rise/26eb66fd.js" />
+<file href="scormcontent/lib/learn_dist/entry.js" />
+<file href="scormcontent/lib/learn_dist/20fb5bfb.js" />
+<file href="scormcontent/lib/learn_dist/5d38ab37.css" />
+<file href="scormcontent/lib/learn_dist/cce489fb.js" />
+<file href="scormcontent/lib/mondrian/entry.js" />
+<file href="scormcontent/lib/mondrian/651f6318.js" />
+<file href="scormcontent/lib/mondrian/afbb5ca8.js" />
+<file href="scormcontent/lib/mondrian/81b7fea8.js" />
+<file href="scormcontent/lib/mondrian/09e37aee.js" />
+<file href="scormcontent/lib/mondrian/196251cf.js" />
+<file href="scormcontent/lib/sandbox/sandbox.html" />
+<file href="scormcontent/lib/sandbox/c77685df.js" />
+<file href="scormcontent/lib/sandbox/4adfab46.css" />
+
+
+      <!-- RUNTIME CONTENT STUFF -->
+      <file href="scormcontent/lib/fonts/Lato2-Regular.woff" />
+<file href="scormcontent/lib/fonts/Lato2-Light.woff" />
+<file href="scormcontent/lib/fonts/Lato2-Italic.woff" />
+<file href="scormcontent/lib/fonts/Lato2-Bold.woff" />
+<file href="scormcontent/lib/fonts/Lato2-Black.woff" />
+<file href="scormcontent/lib/fonts/Merriweather-Black.woff" />
+<file href="scormcontent/lib/fonts/Merriweather-Italic.woff" />
+<file href="scormcontent/lib/fonts/Merriweather-Bold.woff" />
+<file href="scormcontent/lib/fonts/Merriweather-Regular.woff" />
+<file href="scormcontent/lib/fonts/Merriweather-Light.woff" />
+<file href="scormcontent/assets/2j76lBk_3K-kfFFU.jpg" />
+<file href="scormcontent/assets/The-Scene_-A-professional-.jpg" />
+<file href="scormcontent/assets/ElevenLabs_2026-03-18T16_0.mp3" />
+<file href="scormcontent/assets/supervisor-in-hi-vis-Stand.jpg" />
+<file href="scormcontent/assets/ElevenLabs_2026-03-18T15_5.mp3" />
+<file href="scormcontent/assets/nqngf1/mountains.jpg" />
+<file href="scormcontent/assets/ElevenLabs_2026-03-18T16_1.mp3" />
+<file href="scormcontent/assets/Two-workers-%28manager-_-e.jpg" />
+<file href="scormcontent/assets/qHbL2M/ElevenLabs_2026-03-18T16_1.mp3" />
+<file href="scormcontent/assets/Worker-in-green-vest-sleep.jpg" />
+<file href="scormcontent/assets/one-worker-showing-aggress.jpg" />
+<file href="scormcontent/assets/A-worker-is-rolling-up-the.jpg" />
+<file href="scormcontent/assets/qbnzh52vq9rmr0cwzjmv9djswg.jpg" />
+<file href="scormcontent/assets/wabaluba.mp3" />
+<file href="scormcontent/assets/BMKq69/ElevenLabs_2026-03-18T16_1.mp3" />
+<file href="scormcontent/assets/Gemini_Generated_Image_qdw.jpg" />
+<file href="scormcontent/assets/ElevenLabs_2026-04-17T08_5.mp3" />
+<file href="scormcontent/assets/Gemini_Generated_Image_b0m.jpg" />
+<file href="scormcontent/assets/Screenshot%202026-03-17%20.png" />
+<file href="scormcontent/assets/U3OD-2/Screenshot%202026-03-17%20.png" />
+<file href="scormcontent/assets/Reasonable%20Cause%20Obser.pdf" />
+<file href="scormcontent/assets/private-space-Manager-hold.jpg" />
+<file href="scormcontent/assets/ElevenLabs_2026-04-08T05_4.mp3" />
+<file href="scormcontent/assets/A-supervisor-in-hi-vis-obs.jpg" />
+<file href="scormcontent/assets/ElevenLabs_2026-03-18T16_2.mp3" />
+<file href="scormcontent/assets/A-supervisor-in-hi-vis-cal.jpg" />
+<file href="scormcontent/assets/dBNYue/ElevenLabs_2026-03-18T16_2.mp3" />
+<file href="scormcontent/assets/wmremove-transformed%20%28.jpg" />
+<file href="scormcontent/assets/ElevenLabs_2026-03-18T16_3.mp3" />
+<file href="scormcontent/assets/Dl7fJN/ElevenLabs_2026-03-18T16_2.mp3" />
+<file href="scormcontent/assets/3i3M0djM3uWmWK4T.jpg" />
+
+    </resource>
+  </resources>
+</manifest>

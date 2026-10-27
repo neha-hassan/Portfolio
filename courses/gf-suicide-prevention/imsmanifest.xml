@@ -1,0 +1,131 @@
+<?xml version="1.0" ?>
+<manifest identifier="AKw5lfZJTLsQKOw2U-f1IlOFNmhZ_1HEGvqwuep5" version="1"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+    <adlcp:location>metadata.xml</adlcp:location> 
+  </metadata>
+  <organizations default="articulate_rise">
+      <organization identifier="articulate_rise">
+      <title>Suicide Prevention: Life Safety Protocol for Managers</title>
+      <item identifier="i1" identifierref="r1" isvisible="true">
+        <title>Suicide Prevention: Life Safety Protocol for Managers</title>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="r1" type="webcontent" adlcp:scormtype="sco" href="scormdriver/indexAPI.html">
+      <!-- SCORMDRIVER STUFF -->
+      <file href="scormdriver/indexAPI.html" />
+      <file href="scormdriver/preloadIntegrity.js" />
+      <file href="scormdriver/driverOptions.js" />
+      <file href="scormdriver/AICCComm.html" />
+      <file href="scormdriver/auto-scripts/AutoBookmark.js" />
+      <file href="scormdriver/auto-scripts/AutoCompleteSCO.js" />
+      <file href="scormdriver/auto-scripts/CourseExit.js" />
+      <file href="scormdriver/blank.html" />
+      <file href="scormdriver/goodbye.html" />
+      <file href="scormdriver/scormdriver.js" />
+      <file href="scormdriver/browsersniff.js" />
+
+      <!-- RUNTIME COMMON STUFF -->
+      <file href="scormcontent/index.html" />
+
+      
+        <file href="scormcontent/lib/lzwcompress.js"/>
+      
+
+      <!-- FRONTEND BUNDLE ASSETS -->
+      <file href="scormcontent/lib/rise/6221e9b3.js" />
+<file href="scormcontent/lib/rise/220a9314.css" />
+<file href="scormcontent/lib/rise/39534992.js" />
+<file href="scormcontent/lib/rise/8eb05306.css" />
+<file href="scormcontent/lib/rise/4ea12f4a.js" />
+<file href="scormcontent/lib/rise/9aede266.ttf" />
+<file href="scormcontent/lib/rise/bff47411.woff" />
+<file href="scormcontent/lib/rise/ca69a9b5.js" />
+<file href="scormcontent/lib/rise/587a1be7.js" />
+<file href="scormcontent/lib/rise/61243a87.js" />
+<file href="scormcontent/lib/rise/76830a3e.js" />
+<file href="scormcontent/lib/rise/3125981b.js" />
+<file href="scormcontent/lib/rise/f10f6f58.js" />
+<file href="scormcontent/lib/rise/621ebd87.js" />
+<file href="scormcontent/lib/rise/d4f1495e.js" />
+<file href="scormcontent/lib/rise/f50b75a0.js" />
+<file href="scormcontent/lib/rise/64c13194.js" />
+<file href="scormcontent/lib/rise/d4534cdf.js" />
+<file href="scormcontent/lib/rise/578ab21f.js" />
+<file href="scormcontent/lib/rise/90f65467.js" />
+<file href="scormcontent/lib/rise/2d62667c.js" />
+<file href="scormcontent/lib/rise/54010a1a.js" />
+<file href="scormcontent/lib/rise/8716f7be.js" />
+<file href="scormcontent/lib/rise/d878a260.js" />
+<file href="scormcontent/lib/rise/61c7bf33.js" />
+<file href="scormcontent/lib/rise/26eb66fd.js" />
+<file href="scormcontent/lib/learn_dist/entry.js" />
+<file href="scormcontent/lib/learn_dist/9b1f8619.js" />
+<file href="scormcontent/lib/learn_dist/cdfb12a6.css" />
+<file href="scormcontent/lib/learn_dist/193532aa.js" />
+<file href="scormcontent/lib/mondrian/entry.js" />
+<file href="scormcontent/lib/mondrian/651f6318.js" />
+<file href="scormcontent/lib/mondrian/afbb5ca8.js" />
+<file href="scormcontent/lib/mondrian/5e5f4cf5.js" />
+<file href="scormcontent/lib/mondrian/09e37aee.js" />
+<file href="scormcontent/lib/mondrian/196251cf.js" />
+<file href="scormcontent/lib/sandbox/sandbox.html" />
+<file href="scormcontent/lib/sandbox/c77685df.js" />
+<file href="scormcontent/lib/sandbox/4adfab46.css" />
+
+
+      <!-- RUNTIME CONTENT STUFF -->
+      <file href="scormcontent/lib/fonts/Lato2-Regular.woff" />
+<file href="scormcontent/lib/fonts/Lato2-Light.woff" />
+<file href="scormcontent/lib/fonts/Lato2-Italic.woff" />
+<file href="scormcontent/lib/fonts/Lato2-Bold.woff" />
+<file href="scormcontent/lib/fonts/Lato2-Black.woff" />
+<file href="scormcontent/lib/fonts/Merriweather-Black.woff" />
+<file href="scormcontent/lib/fonts/Merriweather-Italic.woff" />
+<file href="scormcontent/lib/fonts/Merriweather-Bold.woff" />
+<file href="scormcontent/lib/fonts/Merriweather-Regular.woff" />
+<file href="scormcontent/lib/fonts/Merriweather-Light.woff" />
+<file href="scormcontent/assets/DDklhameOxY_2bA6.jpg" />
+<file href="scormcontent/assets/Neutral-Workspace-%28Low-C.jpg" />
+<file href="scormcontent/assets/ElevenLabs_2026-04-17T15_5.mp3" />
+<file href="scormcontent/assets/Video%20Project%206%201.mp4" />
+<file href="scormcontent/assets/Video%20Project%206%201.png" />
+<file href="scormcontent/assets/wmremove-transformed%20%28.jpg" />
+<file href="scormcontent/assets/Bqqj8D/ElevenLabs_2026-04-17T15_5.mp3" />
+<file href="scormcontent/assets/Gemini_Generated_Image_s10.jpg" />
+<file href="scormcontent/assets/ElevenLabs_2026-04-20T12_4.mp3" />
+<file href="scormcontent/assets/okWcGJ/ElevenLabs_2026-04-17T15_5.mp3" />
+<file href="scormcontent/assets/Gemini_Generated_Image_spe.jpg" />
+<file href="scormcontent/assets/myths-vs-facts-.jpg" />
+<file href="scormcontent/assets/AYMaIx/ElevenLabs_2026-04-17T15_5.mp3" />
+<file href="scormcontent/assets/GRyENA/mountains.jpg" />
+<file href="scormcontent/assets/When-concern-becomes-actio.jpg" />
+<file href="scormcontent/assets/DV8TdA/ElevenLabs_2026-04-17T15_5.mp3" />
+<file href="scormcontent/assets/caution-.jpg" />
+<file href="scormcontent/assets/ElevenLabs_2026-04-17T16_0.mp3" />
+<file href="scormcontent/assets/it-is-okay-to-ask-for-help.jpg" />
+<file href="scormcontent/assets/kDpgkl/ElevenLabs_2026-04-17T16_0.mp3" />
+<file href="scormcontent/assets/workplace-setting.-manager.jpg" />
+<file href="scormcontent/assets/ElevenLabs_2026-04-20T12_5.mp3" />
+<file href="scormcontent/assets/support-and-resources-at-w.jpg" />
+<file href="scormcontent/assets/ElevenLabs_2026-04-17T16_2.mp3" />
+<file href="scormcontent/assets/suicide-isk-at-work-no-tex.jpg" />
+<file href="scormcontent/assets/ElevenLabs_2026-04-17T16_3.mp3" />
+<file href="scormcontent/assets/A-manager-holding-a-warm-c.jpg" />
+<file href="scormcontent/assets/Rn5VGB/ElevenLabs_2026-04-20T12_5.mp3" />
+<file href="scormcontent/assets/support-hand.jpg" />
+<file href="scormcontent/assets/ElevenLabs_2026-04-17T16_4.mp3" />
+<file href="scormcontent/assets/Css4bD/ElevenLabs_2026-04-17T16_3.mp3" />
+<file href="scormcontent/assets/C9_QRvFv2N7sMmcW.jpg" />
+
+    </resource>
+  </resources>
+</manifest>

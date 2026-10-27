@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to Identify and Approach an Intoxicated Worker | Neha Hassan</title>
+<style>
+  html,body{margin:0;height:100%;background:#fff;font-family:Arial,Helvetica,sans-serif}
+  .bar{position:fixed;top:0;left:0;right:0;height:44px;display:flex;align-items:center;justify-content:space-between;
+       padding:0 16px;background:#141414;color:#f4f1ea;font-size:13px;z-index:2;box-sizing:border-box}
+  .bar a{color:#f4f1ea;text-decoration:none;opacity:.85}
+  .bar a:hover{opacity:1}
+  .bar span{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin:0 12px;opacity:.7}
+  iframe{position:fixed;top:44px;left:0;width:100%;height:calc(100% - 44px);border:0}
+</style>
+<script>
+/* Portfolio stand-in for an LMS. Answers the course's SCORM 1.2 and 2004 calls
+   so it plays normally outside an LMS. Nothing is tracked or sent anywhere. */
+(function(){
+  function store(defaults){
+    var d={};for(var k in defaults)d[k]=defaults[k];
+    return {
+      get:function(k){
+        if(k in d)return String(d[k]);
+        if(/\._count$/.test(k))return "0";
+        return "";
+      },
+      set:function(k,v){d[k]=String(v);return "true";}
+    };
+  }
+  var s12=store({
+    "cmi.core.student_id":"portfolio-visitor","cmi.core.student_name":"Visitor, Portfolio",
+    "cmi.core.lesson_location":"","cmi.core.credit":"credit","cmi.core.lesson_status":"not attempted",
+    "cmi.core.entry":"ab-initio","cmi.core.score.raw":"","cmi.core.total_time":"0000:00:00",
+    "cmi.core.lesson_mode":"normal","cmi.suspend_data":"","cmi.launch_data":"",
+    "cmi.core._children":"student_id,student_name,lesson_location,credit,lesson_status,entry,score,total_time,lesson_mode,exit,session_time"
+  });
+  window.API={
+    LMSInitialize:function(){return "true"},LMSFinish:function(){return "true"},
+    LMSGetValue:function(k){return s12.get(k)},LMSSetValue:function(k,v){return s12.set(k,v)},
+    LMSCommit:function(){return "true"},LMSGetLastError:function(){return "0"},
+    LMSGetErrorString:function(){return "No error"},LMSGetDiagnostic:function(){return ""}
+  };
+  var s04=store({
+    "cmi.learner_id":"portfolio-visitor","cmi.learner_name":"Visitor, Portfolio","cmi.location":"",
+    "cmi.credit":"credit","cmi.completion_status":"unknown","cmi.success_status":"unknown",
+    "cmi.entry":"ab-initio","cmi.mode":"normal","cmi.suspend_data":"","cmi.launch_data":"",
+    "cmi.total_time":"PT0S","cmi.score.raw":""
+  });
+  window.API_1484_11={
+    Initialize:function(){return "true"},Terminate:function(){return "true"},
+    GetValue:function(k){return s04.get(k)},SetValue:function(k,v){return s04.set(k,v)},
+    Commit:function(){return "true"},GetLastError:function(){return "0"},
+    GetErrorString:function(){return "No error"},GetDiagnostic:function(){return ""}
+  };
+})();
+</script>
+</head>
+<body>
+  <div class="bar">
+    <a href="../../#work">&larr; Back to portfolio</a>
+    <span>How to Identify and Approach an Intoxicated Worker</span>
+    <a href="../../#contact">Contact Neha</a>
+  </div>
+  <iframe src="scormdriver/indexAPI.html" title="How to Identify and Approach an Intoxicated Worker" allow="autoplay; fullscreen" allowfullscreen></iframe>
+</body>
+</html>
