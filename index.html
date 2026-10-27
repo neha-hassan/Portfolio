@@ -50,7 +50,10 @@ p{margin:0}
 .intro img.me{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:14px}
 .hero h1{font-size:clamp(34px,4.4vw,50px);font-weight:800;letter-spacing:-.025em}
 .hero .role{font-size:19px;font-weight:600;color:var(--green-dark);margin-top:6px}
-.hero .lede.small{font-size:16px;color:var(--muted);margin-top:12px}
+.proof{list-style:none;margin:28px 0 0;padding:20px 0 0;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,auto);gap:20px 36px;justify-content:start}
+.proof strong{display:block;font-size:24px;font-weight:800;color:var(--ink);letter-spacing:-.01em;line-height:1.2}
+.proof span{display:block;font-size:14px;color:var(--muted);line-height:1.35;max-width:12em}
+@media (max-width:900px){.proof{grid-template-columns:repeat(2,auto)}}
 @media (max-width:760px){.intro{grid-template-columns:1fr;gap:28px}.intro img.me{max-width:200px}}
 .hero .lede{font-size:18.5px;margin-top:18px;max-width:36em}
 .hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
@@ -188,8 +191,13 @@ dialog.viewer::backdrop{background:rgba(10,14,20,.86)}
     <div>
       <h1>Hi, I'm Neha Hassan.</h1>
       <p class="role">Research Specialist | Instructional Designer and eLearning Developer</p>
-      <p class="lede">I build compliance e-learning across healthcare, mental health, workplace safety, education and corporate training. I also design training for psychologists and complete K-12 lessons.</p>
-      <p class="lede small">MS in Psychology. 6+ years in research. Top Rated on Upwork with 100% Job Success.</p>
+      <p class="lede">I'm a research analyst who turns evidence into learning people remember. I've helped build science-backed courses, created compliance e-learning for Drug and Alcohol Services Australia, Ford Australia/NZ and Goodman Fielder Australia, designed APS-approved CPD for psychologists, and built ready-to-teach English curriculum for a US charter school network.</p>
+      <ul class="proof">
+        <li><strong>52</strong><span>courses co-developed</span></li>
+        <li><strong>10+</strong><span>compliance courses built</span></li>
+        <li><strong>6+ years</strong><span>in psychology research</span></li>
+        <li><strong>Top Rated</strong><span>100% Job Success on Upwork</span></li>
+      </ul>
       <div class="cta">
         <a class="btn primary" href="#work">See live courses</a>
         <a class="btn" href="#contact">Get in touch</a>
@@ -231,7 +239,7 @@ dialog.viewer::backdrop{background:rgba(10,14,20,.86)}
   <div class="wrap">
     <div class="head">
       <h2 id="work-title">Compliance e-learning</h2>
-      <p>Seven Rise 360 courses for Australian workplaces. All live. Open any one and click through.</p>
+      <p>10+ courses built for Australian workplaces. Here are seven you can open and click through.</p>
     </div>
     <div class="courses">
       <article class="course"><a href="courses/ford-drug-alcohol-leaders/" target="_blank" rel="noopener">
@@ -286,7 +294,7 @@ dialog.viewer::backdrop{background:rgba(10,14,20,.86)}
     <div class="online">
       <div>
         <p class="c">The Impulsivity Project</p>
-        <h3>8 evidence-based online courses</h3>
+        <h3>8 APS-accredited online courses</h3>
         <p>Self-paced programs built with a clinical psychologist to help people take back control. Anger, binge drinking, binge eating, overspending, procrastination, relationships and self-control. Eight modules each, with workbooks and exercises.</p>
       </div>
       <a class="btn" href="https://impulsivity.com.au/courses/" target="_blank" rel="noopener">See the courses</a>
