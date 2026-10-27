@@ -1,0 +1,254 @@
+<?xml version="1.0" standalone="no" ?>
+<manifest
+  identifier="qTDCDX-I8eAolfRrbf7SehxEkhNYMTH0wjgYFUgg"
+  version="1.3"
+  xmlns="http://www.imsglobal.org/xsd/imscp_v1p1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_v1p3"
+  xmlns:adlseq="http://www.adlnet.org/xsd/adlseq_v1p3"
+  xmlns:adlnav="http://www.adlnet.org/xsd/adlnav_v1p3"
+  xmlns:imsss="http://www.imsglobal.org/xsd/imsss"
+  xsi:schemaLocation="http://www.imsglobal.org/xsd/imscp_v1p1 imscp_v1p1.xsd
+                      http://www.adlnet.org/xsd/adlcp_v1p3 adlcp_v1p3.xsd
+                      http://www.adlnet.org/xsd/adlseq_v1p3 adlseq_v1p3.xsd
+                      http://www.adlnet.org/xsd/adlnav_v1p3 adlnav_v1p3.xsd
+                      http://www.imsglobal.org/xsd/imsss imsss_v1p0.xsd"
+>
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>2004 4th Edition</schemaversion>
+    <adlcp:location>metadata.xml</adlcp:location>
+  </metadata>
+  <organizations default="B0">
+    <organization identifier="B0" adlseq:objectivesGlobalToSystem="false">
+      <title>Drug and Alcohol Awareness for Workers</title>
+      <item identifier="i1" identifierref="r1" isvisible="true">
+        <title>Drug and Alcohol Awareness for Workers</title>
+        <adlcp:dataFromLMS>dataFromLMS</adlcp:dataFromLMS>
+        
+        <imsss:sequencing>
+          <imsss:deliveryControls tracked="true" completionSetByContent="true" objectiveSetByContent="true" />
+        </imsss:sequencing>
+      </item>
+      <metadata>
+        <adlcp:location>metadata.xml</adlcp:location>
+      </metadata>
+      <imsss:sequencing>
+        <imsss:controlMode choice="true" flow="true" />
+      </imsss:sequencing>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="r1" type="webcontent" adlcp:scormType="sco" href="scormdriver/indexAPI.html">
+      
+        <file href="scormcontent/lib/mondrian/entry.js" />
+      
+        <file href="scormcontent/lib/learn_dist/entry.js" />
+      
+        <file href="scormcontent/lib/mondrian/566d9284.js" />
+      
+        <file href="scormcontent/lib/rise/ce4bdff8.js" />
+      
+        <file href="scormcontent/lib/rise/ca4ee43b.css" />
+      
+        <file href="scormcontent/lib/learn_dist/9b1f8619.js" />
+      
+        <file href="scormcontent/lib/ai-scenario/entry.js" />
+      
+        <file href="scormcontent/lib/learn_dist/cd7714c6.css" />
+      
+        <file href="scormcontent/lib/ai-scenario/57960b97.js" />
+      
+        <file href="scormcontent/lib/sandbox/sandbox.html" />
+      
+        <file href="scormcontent/lib/ai-scenario/841684f2.js" />
+      
+        <file href="scormcontent/lib/learn_dist/2134587e.js" />
+      
+        <file href="scormcontent/lib/sandbox/c77685df.js" />
+      
+        <file href="scormcontent/lib/ai-scenario/6237cfa3.js" />
+      
+        <file href="scormcontent/lib/sandbox/4adfab46.css" />
+      
+        <file href="scormcontent/lib/ai-scenario/312c66b0.js" />
+      
+        <file href="scormcontent/lib/ai-scenario/5e51779a.js" />
+      
+        <file href="scormcontent/lib/mondrian/c5a5e49f.js" />
+      
+        <file href="scormcontent/lib/ai-scenario/722e48c4.js" />
+      
+        <file href="scormcontent/lib/ai-scenario/f6b91ea8.js" />
+      
+        <file href="scormcontent/lib/mondrian/79737889.js" />
+      
+        <file href="scormcontent/lib/mondrian/3868877e.js" />
+      
+        <file href="scormcontent/lib/mondrian/5d56aa22.js" />
+      
+        <file href="scormcontent/lib/rise/f81f670e.js" />
+      
+        <file href="scormcontent/lib/rise/d9fd400f.css" />
+      
+        <file href="scormcontent/lib/rise/34cb0cbf.js" />
+      
+        <file href="scormcontent/lib/rise/9aede266.ttf" />
+      
+        <file href="scormcontent/lib/rise/bff47411.woff" />
+      
+        <file href="scormcontent/lib/rise/aaffd20b.js" />
+      
+        <file href="scormcontent/lib/rise/8db4efdd.js" />
+      
+        <file href="scormcontent/lib/rise/047d7ebc.js" />
+      
+        <file href="scormcontent/lib/rise/b05a8c9f.js" />
+      
+        <file href="scormcontent/lib/rise/4fda90c0.js" />
+      
+        <file href="scormcontent/lib/rise/e3a70a47.js" />
+      
+        <file href="scormcontent/lib/rise/819cec00.js" />
+      
+        <file href="scormcontent/lib/rise/299f5ddb.js" />
+      
+        <file href="scormcontent/lib/rise/ff165790.js" />
+      
+        <file href="scormcontent/lib/rise/f62ce274.js" />
+      
+        <file href="scormcontent/lib/rise/845122ff.js" />
+      
+        <file href="scormcontent/lib/rise/17afba40.js" />
+      
+        <file href="scormcontent/lib/rise/64920db2.js" />
+      
+        <file href="scormcontent/lib/rise/f4fa5507.js" />
+      
+        <file href="scormcontent/lib/rise/adcbccc0.js" />
+      
+        <file href="scormcontent/lib/rise/a4b1d1ff.js" />
+      
+        <file href="scormdriver/driverOptions.js" />
+      
+        <file href="scormdriver/indexAPI.html" />
+      
+        <file href="scormdriver/goodbye.html" />
+      
+        <file href="scormcontent/index.html" />
+      
+        <file href="scormdriver/lib/dist/75b507a5.js" />
+      
+        <file href="scormcontent/lib/dist/7137cfb8.js" />
+      
+        <file href="scormcontent/assets/YTDown.com_YouTube_Drug-an.jpg" />
+      
+        <file href="scormcontent/assets/Forklift_colliding_with_pa.gif" />
+      
+        <file href="scormcontent/assets/remove-the-info-icon-on-th.jpg" />
+      
+        <file href="scormcontent/assets/Gemini_Generated_Image_v97.jpg" />
+      
+        <file href="scormcontent/assets/mountains.jpg" />
+      
+        <file href="scormcontent/assets/Accountant_making_spreadsh.gif" />
+      
+        <file href="scormcontent/assets/stock-image.jpg" />
+      
+        <file href="scormdriver/browsersniff.js" />
+      
+        <file href="scormcontent/assets/Crane_moving_suspended_aut.gif" />
+      
+        <file href="scormdriver/auto-scripts/AutoBookmark.js" />
+      
+        <file href="scormdriver/lms-interface.js" />
+      
+        <file href="scormcontent/assets/ChatGPT Image Sep 24, 2026.jpg" />
+      
+        <file href="scormcontent/assets/Gemini_Generated_Image_70y.jpg" />
+      
+        <file href="scormcontent/assets/image017.jpg" />
+      
+        <file href="scormdriver/scormdriver.js" />
+      
+        <file href="scormcontent/assets/Gemini_Generated_Image_60r.jpg" />
+      
+        <file href="scormdriver/AICCComm.html" />
+      
+        <file href="scormcontent/assets/Gemini_Generated_Image_1jc.jpg" />
+      
+        <file href="scormdriver/auto-scripts/CourseExit.js" />
+      
+        <file href="scormdriver/blank.html" />
+      
+        <file href="scormdriver/auto-scripts/AutoCompleteSCO.js" />
+      
+        <file href="scormcontent/assets/ElevenLabs_2026-09-10T11_2.mp3" />
+      
+        <file href="scormcontent/assets/Gemini_Generated_Image_ubp.jpg" />
+      
+        <file href="scormcontent/assets/0913.mp3" />
+      
+        <file href="scormcontent/assets/Gemini_Generated_Image_5j8.jpg" />
+      
+        <file href="scormcontent/assets/Gemini_Generated_Image_4i3.jpg" />
+      
+        <file href="scormcontent/assets/ElevenLabs_2026-09-10T11_3.mp3" />
+      
+        <file href="scormcontent/assets/remove-the-black-borders-o.jpg" />
+      
+        <file href="scormcontent/assets/Gemini_Generated_Image_4m7.jpg" />
+      
+        <file href="scormcontent/assets/A-warm,-soft-focus-photogr.jpg" />
+      
+        <file href="scormcontent/assets/0924.mp3" />
+      
+        <file href="scormcontent/assets/ElevenLabs_2026-09-10T11_1.mp3" />
+      
+        <file href="scormcontent/assets/ElevenLabs_2026-09-13T14_5.mp3" />
+      
+        <file href="scormcontent/assets/ElevenLabs_2026-09-30T10_4.mp3" />
+      
+        <file href="scormcontent/assets/A-clean,-wide-shot-of-an-u.jpg" />
+      
+        <file href="scormcontent/assets/ai-captions-1789643199453.vtt" />
+      
+        <file href="scormcontent/assets/ElevenLabs_2026-09-10T11_5.mp3" />
+      
+        <file href="scormcontent/assets/YTDown.com_YouTube_Drug-an.mp4" />
+      
+        <file href="scormcontent/lib/fonts/OpenSans-Italic.woff" />
+      
+        <file href="scormcontent/lib/fonts/OpenSans-Bold.woff" />
+      
+        <file href="scormcontent/assets/ElevenLabs_2026-09-10T11_4.mp3" />
+      
+        <file href="scormcontent/assets/0924(2).mp3" />
+      
+        <file href="scormcontent/assets/ElevenLabs_2026-09-10T11_4-1.mp3" />
+      
+        <file href="scormcontent/assets/ElevenLabs_2026-09-23T20_2.mp3" />
+      
+        <file href="scormcontent/lib/fonts/OpenSans-Light.woff" />
+      
+        <file href="scormcontent/assets/ElevenLabs_2026-09-13T16_0.mp3" />
+      
+        <file href="scormcontent/lib/fonts/OpenSans-Regular.woff" />
+      
+        <file href="scormcontent/lib/fonts/Lato2-Regular.woff" />
+      
+        <file href="scormcontent/assets/ElevenLabs_2026-09-13T14_1.mp3" />
+      
+        <file href="scormcontent/lib/fonts/Lato2-Black.woff" />
+      
+        <file href="scormcontent/lib/fonts/Lato2-Italic.woff" />
+      
+        <file href="scormcontent/lib/fonts/Lato2-Bold.woff" />
+      
+        <file href="scormcontent/lib/fonts/Lato2-Light.woff" />
+      
+        <file href="scormcontent/runtime-data.js" />
+      
+    </resource>
+  </resources>
+</manifest>
